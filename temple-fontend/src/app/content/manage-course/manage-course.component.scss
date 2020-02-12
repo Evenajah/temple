@@ -1,0 +1,21 @@
+
+// :host button.ui-button-info.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only {
+//     background-color: #b8860b !important;
+//     border: #b8860b !important;
+// }
+
+// :host button.ui-button-info.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only:hover {
+//     background-color: #cdaa54 !important;
+//     border: #cdaa54 !important;
+// }
+
+:host a.ui-paginator-page.ui-paginator-element.ui-state-default.ui-corner-all.ui-state-active.ng-star-inserted {
+    background-color: #b8860b !important;
+    border: #b8860b !important;
+}
+
+:host a.ui-paginator-page.ui-paginator-element.ui-state-default.ui-corner-all.ui-state-active.ng-star-inserted:hover {
+    background-color: #cdaa54 !important;
+    border: #cdaa54 !important;
+}
+

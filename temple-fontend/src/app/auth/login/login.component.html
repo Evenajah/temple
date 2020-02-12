@@ -1,0 +1,69 @@
+<ngx-spinner></ngx-spinner>
+<div class="ui-fluid">
+  <div class="container">
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+      <div class="row">
+        <div class="ui-g-12 ui-lg-5 ui-md-7 ui-sm-12 horizontal-center">
+          <p-card>
+            <p-header>เข้าสู่ระบบ</p-header>
+            <!-- from send value -->
+            <!-- send value to function onSubmit(e) in login.componebt.ts file-->
+            <form [formGroup]="form" (submit)="onSubmit($event)">
+              <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <label for="username">ชื่อผู้ใช้</label>
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon">
+                    <fa-icon [icon]="['fas', 'user']"></fa-icon>
+                  </span>
+                  <!-- username value -->
+                  <input type="text" pInputText id="username" formControlName="username" name="username"
+                    placeholder="ชื่อผู้ใช้" />
+                </div>
+                <!-- Check Error from username value -->
+                <div *ngIf="formError.username" class="text-danger text-invalid">{{formError.username}}</div>
+              </div>
+              <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <label for="password">รหัสผ่าน</label>
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon">
+                    <fa-icon [icon]="['fas', 'lock']"></fa-icon>
+                  </span>
+                  <!-- password value -->
+                  <input type="password" id="password" pInputText formControlName="password" name="password"
+                    placeholder="รหัสผ่าน" />
+                </div>
+                <!-- Check Error password value -->
+                <div *ngIf="formError.password" class="text-danger text-invalid">{{formError.password }}</div>
+              </div>
+              <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <!-- link to forget-password page -->
+                <a routerLink="/auth/forget-password"> ลืมรหัสผ่าน</a>
+              </div>
+              <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6">
+                  <button pButton type="submit" label="เข้าสู่ระบบ"  class="ui-button-warning ui-button-raised"></button>
+                </div>
+                <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6">
+                  <button pButton type="button" label="ลงทะเบียน" class="ui-button-secondary ui-button-raised" routerLink="/auth/register"></button>
+                </div>
+              </div>
+            </form>
+          </p-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-toast position="center" key="alert" [modal]="true" [baseZIndex]="99999">
+    <ng-template let-message pTemplate="message">
+      <div style="text-align: center">
+        <i class="pi pi-times" style="font-size: 3em"></i>
+        <h3>{{message.summary}}</h3>
+      </div>
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12">
+          <button type="button" autofocus  pButton (click)="onConfirm()" label="ปิด" class="ui-button-success ui-button-raised"></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
+</div>

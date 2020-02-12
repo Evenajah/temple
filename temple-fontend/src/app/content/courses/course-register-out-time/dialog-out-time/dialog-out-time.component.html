@@ -1,0 +1,85 @@
+<!-- <p-dialog header="แบบฟอร์มการขออนุมัติคอร์สนอกเวลา" [(visible)]="displayDialog" [responsive]="true" showEffect="fade"
+    [modal]="true" [style]="{width: ''}" [contentStyle]="{'max-height':'450px'}"> -->
+<p-dialog header="แบบฟอร์มการขออนุมัติคอร์สนอกเวลา" [(visible)]="displayDialog" [responsive]="true" showEffect="fade"
+  [modal]="true" [style]="{width: '700px'}" positionTop="100" [contentStyle]="{'max-height':'500px'}"
+  (onHide)="onClose()">
+  <form [formGroup]="formOutTime" (submit)="assignCourseOutTime()">
+
+    <div class="ui-g form-input">
+      <div class="ui-g-4 ">
+        <span>คำร้องขออนุมัติคอร์สนอกเวลา<span class="star">*</span></span>
+      </div>
+      <div class="ui-g-8">
+        <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" formControlName="detail"></textarea>
+      </div>
+      <!-- <div class="ui-g-12">
+              <p-message severity="error" text="กรุณากรอกคำร้องขอ" 
+              *ngIf="!formOutTime.controls['detail'].valid&&formOutTime.controls['detail'].dirty"></p-message>
+          </div> -->
+      <div class="ui-g-4">
+        <span>วันที่เรียน<span class="star">*</span></span>
+      </div>
+      <div class="ui-g-8">
+        <!-- <p-calendar class="calendar-button" dateFormat="dd/mm/yy" [monthNavigator]="true" formControlName="date"
+              selectionMode="range" [readonlyInput]="true" [yearNavigator]="true" > <!-- [yearRange]="yearRange" -->
+        <!-- </p-calendar> -->
+        <p-calendar cdgsThaiCalendar formControlName="date" [monthNavigator]="true" selectionMode="range"
+          [readonlyInput]="true" [yearNavigator]="true" [showIcon]="true" dateFormat="dd/mm/yy"
+          yearRange="{{year}}: {{year+10}}">
+        </p-calendar>
+      </div>
+      <!-- <div class="ui-g-12">
+              <p-message severity="error" text="กรุณาเลือกวันที่เรียน" 
+              *ngIf="!formOutTime.controls['date'].valid"></p-message>
+          </div> -->
+      <div class="ui-g-4">
+        <span>การเดินทางมาที่วัด<span class="star">*</span></span>
+      </div>
+      <div class="ui-g-8">
+        <!-- <p-dropdown [options]="transportations" optionLabel="name" value="tranId" 
+                  placeholder="กรุณาเลือกการเดินทาง" filter="true" formControlName="tranId">
+              </p-dropdown> -->
+        <p-autoComplete formControlName="tranId" placeholder="กรุณาเลือกการเดินทาง"
+          [suggestions]="filteredTransportation" value="tranId" (completeMethod)="filterTransportationMultiple($event)"
+          [minLength]="1" field="name" [dropdown]="true">
+        </p-autoComplete>
+      </div>
+      <!-- <div class="ui-g-4 "> -->
+      <!-- <p-message severity="error" text="กรุณาเลือกการเดินทาง" 
+              *ngIf="!formOutTime.controls['tranId'].valid"></p-message> -->
+      <!-- </div> -->
+      <div class="ui-g-4">
+        <span>ประสบการณ์ที่ผ่านมา<span class="star">*</span></span>
+      </div>
+      <div class="ui-g-8">
+        <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" formControlName="expected"></textarea>
+      </div>
+      <div class="ui-g-4">
+        <span>ประสบการณ์ที่คาดว่าจะได้รับ<span class="star">*</span></span>
+      </div>
+      <div class="ui-g-8">
+        <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" formControlName="experience"></textarea>
+      </div>
+    </div>
+    <p-footer>
+      <div class="ui-g-12 ">
+        <div class="ui-g-12" style="text-align: right">
+          <button type="submit" pButton label="ยืนยัน" class="ui-button-raised ui-button-info"
+            [disabled]="!formOutTime.valid"></button>
+          <button type="button" pButton (click)="displayDialog=false" label="ยกเลิก"
+            class="ui-button-raised ui-button-secondary"></button>
+        </div>
+      </div>
+    </p-footer>
+  </form>
+</p-dialog>
+<p-confirmDialog [style]="{width: '50vw'}" #cd acceptButtonStyleClass="button-submit">
+  <p-footer>
+    <button type="button" pButton label="ยืนยัน" (click)="cd.accept()" class="ui-button-raised ui-button-info"></button>
+    <button type="button" pButton label="ยกเลิก" (click)="cd.reject()"
+      class="ui-button-raised ui-button-secondary"></button>
+  </p-footer>
+</p-confirmDialog>
+<!-- <p-confirmDialog [style]="{width: '50vw'}" acceptButtonStyleClass="button-submit" 
+    acceptLabel="ยืนยัน" rejectButtonStyleClass="button-cancel" 
+    rejectLabel="ยกเลิก"></p-confirmDialog> -->

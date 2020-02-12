@@ -1,0 +1,197 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+    <div style="text-align: center">
+      <h1>แจ้งเตือน</h1>
+      <span>{{ (numberOfNotice ) ?'' :  '( ไม่มีการแจ้งเตือน )'}}</span>
+    </div>
+    <div class="line"></div>
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+      <!-- {{notices|async | json}} -->
+      <p-tabView>
+        <!-- แจ้งเตือนของ พระ -->
+        <p-tabPanel header="แจ้งเตือนการสมัครคอร์ส" *ngIf="showRole('monk')" [selected]="true">
+          <p-table #tb1  [value]="notices|async" [paginator]="true" [rows]="5" [responsive]="true"
+          [globalFilterFields]="['notificationTime','detail' ]">
+            <!-- [lazy]="true" (onLazyLoad)="loadDataCanRegis($event)" [totalRecords]="totalRecords" [loading]="loading"> -->
+            <ng-template pTemplate="caption">
+              <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
+                  <div class="ui-inputgroup">
+                    <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                    <input type="text" pInputText placeholder="ค้นหา"
+                      (input)="tb1.filterGlobal($event.target.value, 'contains')">
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th pSortableColumn="notificationTime">
+                  วันที่
+                  <p-sortIcon field="notificationTime" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order">
+                  </p-sortIcon>
+                </th>
+                <th pSortableColumn="detail" class="ui-p-4">
+                  รายละเอียด
+                  <p-sortIcon field="detail" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order">
+                  </p-sortIcon>
+                </th>
+                <th>
+
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData>
+              <tr>
+                <td style="text-align: center">
+                  {{rowData?.notificationTime.toDate()|formatTHdate}}
+
+                </td>
+                <td style="text-align: center">
+                  มีผู้สมัครคอร์ส {{rowData?.detail}}
+                </td>
+                <td style="text-align: center">
+                  <!-- {{rowData.courseID}} -->
+                  <button pButton type="button" label="ดูรายละเอียด" (click)="openSpecailCourse(rowData)"></button>
+                </td>
+                <!-- <td>{{rowData}}</td> -->
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-tabPanel>
+        <!-- แจ้งเตือนของ user -->
+        <p-tabPanel header="แจ้งเตือนคอร์สที่สมัคร" *ngIf="showRole('user')" [selected]="true">
+          <p-table #tb2  [value]="notices|async" [paginator]="true" [rows]="5" [responsive]="true"
+          [globalFilterFields]="['notificationTime','detail' ]">
+            <!-- [lazy]="true" (onLazyLoad)="loadDataCanRegis($event)" [totalRecords]="totalRecords" [loading]="loading"> -->
+            <ng-template pTemplate="caption">
+              <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
+                  <div class="ui-inputgroup">
+                    <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                    <input type="text" pInputText placeholder="ค้นหา"
+                      (input)="tb2.filterGlobal($event.target.value, 'contains')">
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th pSortableColumn="notificationTime">
+                  วันที่
+                  <p-sortIcon field="notificationTime" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order">
+                  </p-sortIcon>
+                </th>
+                <th pSortableColumn="detail" class="ui-p-4">
+                  ชื่อคอร์ส
+                  <p-sortIcon field="detail" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order">
+                  </p-sortIcon>
+                </th>
+                <th>
+
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr *ngIf="rowData.specialApproveStatus != 0 ">
+                <td style="text-align: center">
+                  {{rowData?.notificationTime.toDate()|formatTHdate}}
+                </td>
+                <td>
+                  <span> คอร์ส {{rowData?.detail}} ที่สมัครไว้ <b style="color: #28a745;">ผ่านการอนุมัติ</b> </span>
+                </td>
+                <td style="text-align: center">
+                  <button pButton type="button" label="ดูรายละเอียดคอร์ส" (click)="getCourseDetail(rowData)"></button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-tabPanel>
+        <!-- แจ้งเตือนของ user -->
+
+        <p-tabPanel header="คอร์สใหม่ล่าสุด" *ngIf="showRole('user')">
+          <p-table  #tb3  [value]="dataNewCourse" [paginator]="true" [rows]="5" [responsive]="true"
+          [globalFilterFields]="['stDate','endDate','name','locationName','conditionMin']">
+          <!-- globalFilterFields ตรวขสอบช่องค้นหา-->
+            <!-- [lazy]="true" (onLazyLoad)="loadDataCanRegis($event)" [totalRecords]="totalRecords" [loading]="loading"> -->
+            <ng-template pTemplate="caption">
+              <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
+                  <div class="ui-inputgroup">
+                    <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                    <input type="text" pInputText placeholder="ค้นหา"
+                    (input)="tb3.filterGlobal($event.target.value, 'contains')">
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th pSortableColumn="stDate">
+                  วันที่
+                  <p-sortIcon field="stDate" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order">
+                  </p-sortIcon>
+                </th>
+                <th pSortableColumn="name" class="ui-p-4">
+                  ชื่อคอร์ส
+                  <p-sortIcon field="name" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="ActivstDateate to sort in ascending order">
+                  </p-sortIcon>
+                </th>
+                <th pSortableColumn="locationName" class="ui-p-4">
+                  สถานที่
+                  <p-sortIcon field="locationName" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="ActivstDateate to sort in ascending order">
+                  </p-sortIcon>
+                </th>
+                <th pSortableColumn="conditionMin" class="ui-p-4">
+                  หมายเหตุ
+                  <p-sortIcon field="conditionMin" ariaLabel="Activate to sort"
+                  ariaLabelDesc="Activate to sort in descending order"
+                  ariaLabelAsc="Activate to sort in ascending order">
+              </p-sortIcon>
+                </th>
+                <th>
+                  
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr>
+                <td class="text-center">
+                  {{(rowData?.stDate) ? (rowData.stDate | formatTHdate) : 'ไม่มีข้อมูล'}} -
+                  {{(rowData?.endDate) ? (rowData?.endDate | formatTHdate) : 'ไม่มีข้อมูล'}}
+                </td>
+                <td class="text-left">
+                  {{(rowData?.name)? (rowData.name): 'ไม่มีข้อมูล'}}
+                </td>
+                <td class="text-center">
+                  {{(rowData?.locationName)? (rowData.locationName): 'ไม่มีข้อมูล'}}
+                </td>
+                <td class="text-center">
+                  {{(rowData?.conditionMin>=0)? 'ต้องผ่านอย่างน้อย '+ rowData.conditionMin + ' คอร์ส': 'ไม่มีข้อมูล'}}
+                 <!-- ต้องผ่านอย่างน้อย {{rowData?.conditionMin}} คอร์ส -->
+                </td>
+                <td class="text-center">
+                    <button pButton type="button" label="ดูรายละเอียด" (click)="getNewCourseDetail(rowData)"></button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+</div>

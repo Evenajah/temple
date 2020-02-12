@@ -1,0 +1,28 @@
+
+<ng-container *ngIf="currentUrl != '/notification'&&numberOfNotice" > 
+
+<ng-container  *ngIf="notiDisable">
+
+<div class="wrapper-menu" >
+  <div class="ui-g">
+    <div class="ui-g-4 ui-lg-8 ui-md-10 ui-sm-12">
+      <a  [routerLink]="[ '/notification']">
+      <i class="pi pi-bell" style="font-size: 1.7em;color:#007ad9"></i>
+      <span> คุณมี {{numberOfNotice}} การแจ้งเตือน ...( คลิกเพื่อดูเพิ่มเติม )</span>
+    </a>
+      <!-- <button pButton type="button" label="ดูรายละเอียดการแจ้งเตือน" ></button> -->
+      &nbsp;
+  <!-- <button class="button-reject" pButton type="button" label="ปิดแจ้งเตือน" ></button> -->
+    </div>
+    <!-- <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
+    </div> -->
+    <div class="ui-g-4 ui-lg-4 ui-md-2 ui-sm-12" style="text-align: right;">
+      <!-- <button pButton type="button" label="ดูรายละเอียดการแจ้งเตือน" ></button>
+      &nbsp; -->
+    <button class="button-reject" pButton type="button" label="ปิดแจ้งเตือน" (click)="toggle()" ></button>
+    </div> 
+    
+  </div>
+</div>
+</ng-container>
+</ng-container>

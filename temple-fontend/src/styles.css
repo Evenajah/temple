@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css?family=Trirong:300,400&subset=thai');
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f0e6ce;
+    padding-top: 95px;
+}
+
+body,
+body .ui-widget,
+button,
+pre {
+    font-family: 'Trirong', sans-serif !important;
+}
+
+img {
+    max-width: 100%;
+}
+
+fieldset {
+    background-color: #f1efe9 !important;
+    border-radius: 5px;
+    border: 1px #b8860b solid;
+}
+
+legend {
+    padding: 5px;
+    background-color: #b8860b;
+    color: #fff;
+}
+
+
+/* .ui-button {
+  background-color: #fcc438 !important;
+  border: 1px solid #fcc438 !important;
+  color: #000 !important;
+}
+
+/*
+body .ui-button:enabled:focus {
+  box-shadow: 0 0 0 0.2em #ecb500 !important;
+}
+
+body .ui-button.ui-state-default.ui-button-warning, body .ui-buttonset.ui-button-warning > .ui-button.ui-state-default {
+  background-color: #f0e6ce !important;
+  border: 1px solid #f0e6ce !important;
+  color: #000;
+
+} */
+.button-reject{
+    background-color: #777676 !important;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: #777676 !important;
+    border-radius: 5px;
+    font-size: 1em;
+}
+.button-reject:hover{
+    background-color: #4e4e4e !important;
+    border: #777676;
+    border-radius: 5px;
+}
+.button-success{
+    border-color: #007ad9 !important;
+    background-color: #007ad9 !important;
+}
+.button-success:hover{
+    border-color: #27408B !important;
+    background-color: #27408B !important;
+}
+
+.ui-button-temple {
+    border-color: #b8860b !important;
+    background-color: #b8860b !important;
+}
+
+.ui-button-temple:hover {
+    border-color: #cdaa54 !important;
+    background-color: #cdaa54 !important;
+}
+
+.ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background-color: #b8860b !important
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.horizontal-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.line {
+    border-bottom: 1px solid #cecece;
+    clear: both;
+    display: block;
+}
+
+.container {
+    width: 70%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .container {
+        width: 95%;
+    }
+}
+
+p-table , p-panel , .word-wrap{
+    word-wrap: break-word;
+}

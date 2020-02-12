@@ -1,0 +1,45 @@
+.aa {
+    margin: 0 auto;
+}
+
+.redstar{
+    color: red;
+}
+
+.ui-fluid .ui-button {
+    width: 100%;
+    margin-bottom: 2mm;
+}
+
+:host>>>.ui-table .ui-table-tbody>tr>td {
+    word-wrap: break-word;
+}
+
+.text-info {
+    font-weight: bold;
+    text-align: right;
+}
+ 
+.btn-center{
+    text-align: center
+}
+
+.text-info {
+    font-weight: bold;
+    text-align: right;
+  }
+
+  .text-danger.text-invalid {
+    color: red !important;
+    text-align: right;
+}
+
+@media only screen and (max-width: 640px) {
+    .text-info {
+        text-align: left;
+        padding-top: inherit;
+    }
+    textarea {
+        width:100%;
+    }
+}

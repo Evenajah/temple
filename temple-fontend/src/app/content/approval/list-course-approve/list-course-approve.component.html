@@ -1,0 +1,99 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+    <div style="text-align:center">
+      <h1>{{title}}</h1>
+      <ng-container *ngIf="url === 'approval'; else dataOutTime">
+      <span style="text-align: center;">{{reportNoData}}</span>
+    </ng-container>
+    <ng-template #dataOutTime>
+        <span  style="text-align: center;">{{dataOutTimeReport}}</span>
+    </ng-template>
+    </div>
+    <div class="line"></div>
+    <div class="container">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+          <!-- <p-tabView>
+            <p-tabPanel header="อนุมัติพิเศษ(คอร์สปกติ)"> -->
+          <p-table #dt [columns]="cols" [value]="courses" [paginator]="true" [rows]="5" [responsive]="true"
+            selectionMode="single" [(selection)]="selectedCourse" (onRowSelect)="onRowSelect($event)" [lazy]="true"
+            (onLazyLoad)="loadData($event)" [totalRecords]="totalRecords" [loading]="loading" >
+            <ng-template pTemplate="caption">
+              <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
+                  <div class="ui-inputgroup">
+                    <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                    <input type="text" pInputText placeholder="ค้นหา"
+                      (input)="dt.filterGlobal($event.target.value, 'contains')">
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of columns">
+                  {{col.header}}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr [pSelectableRow]="rowData" *ngIf="isInTime()? rowData.numberOfMembers > 0: 'columns'">
+                <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
+                  {{col.field == "conditionMin" ? "ผ่านการเรียนมาอย่างน้อย " + rowData[col.field] + " คอร์ส" : rowData[col.field]}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+          <!-- </p-tabPanel>
+              <p-tabPanel header="อนุมัติพิเศษ(คอร์สนอกเวลา)">
+                  <p-table
+                  #dt
+                  [columns]="cols"
+                  [value]="coursesOutTime"
+                  [paginator]="true"
+                  [rows]="5"
+                  [responsive]="true"
+                  selectionMode="single"
+                  [(selection)]="selectedCourse"
+                  (onRowSelect)="onRowSelectOutTime($event)"
+                  [lazy]="true"
+                  (onLazyLoad)="loadDataOutTime($event)"
+                  [totalRecords]="totalRecordsOutTime"
+                  [loading]="loadingOutTime"
+                >
+                  <ng-template pTemplate="caption">
+                    <div class="ui-g ui-fluid">
+                      <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
+                        <div class="ui-inputgroup">
+                          <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                          <input type="text" pInputText placeholder="ค้นหา"
+                                (input)="dt.filterGlobal($event.target.value, 'contains')">
+                        </div>
+                      </div>
+                    </div>
+
+                  </ng-template>
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      <th *ngFor="let col of columns">
+                        {{col.header}}
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr [pSelectableRow]="rowData">
+                      <td *ngFor="let col of columns">
+                        <span class="ui-column-title">{{col.header}}</span>
+                        {{col.field == "conditionMin" ? "ผ่านการเรียนมาอย่างน้อย " + rowData[col.field] + " คอร์ส" : rowData[col.field]}}
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </p-tabPanel>
+          </p-tabView> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

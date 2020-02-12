@@ -1,0 +1,378 @@
+<!-- ข้อมูลส่วนตัว ผู้ใช้ และพระอาจารย์ -->
+<ngx-spinner></ngx-spinner>
+<div class="ui-g">
+    <div class="ui-g-12 ui-lg-12 ui-md-12">
+        <div class="margin-top-bottom">
+            <!-- panel 1 ข้อมูลส่วนตัวของผู้ใช้ -->
+            <ng-container *ngIf="showRole ;else elseGrid">
+                <div class="ui-g-12 ui-lg-6 ui-md-12">
+                    <p-panel styleClass="panelHeader">
+                        <p-header>
+                            <div class="ui-g-6 ui-lg-6 ui-md-6 header-panel">
+                                <span>ข้อมูลส่วนตัว</span>
+                            </div>
+                        </p-header>
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-lg-5 ui-md-12 img-position">
+                                <div class="set-position"></div>
+                                <img src="{{(userData?.img) ? 'data:image/jpg;base64,'+ userData.img : './assets/images/no-img.png'}}"
+                                    class="img-info" />
+                            </div>
+                            <div class="ui-g-12 ui-lg-7 ui-md-12 set-display">
+                                <div class="ui-g-5 ui-lg-4 ui-md-2 text-info">
+                                    <span>ชื่อ-นามสกุล</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-8 ui-md-4 ">
+                                    <span>{{(userData) ? userData.titleName +''+ userData.fname+' '+userData.lname : ''}}</span>
+                                </div>
+                                <div class="ui-g-5 ui-lg-4 ui-md-2 text-info">
+                                    <span>อาชีพ</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-8 ui-md-4 ">
+                                    <span>{{(userData?.job!=null) ? userData.job:'ไม่มีข้อมูล'}}</span>
+                                </div>
+                                <div class="ui-g-5 ui-lg-4 ui-md-2 text-info">
+                                    <span>ที่อยู่</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-8 ui-md-4">
+                                    <span>{{(userData?.address!=null) ? userData.address:'ไม่มีข้อมูล'}}</span>
+                                </div>
+                                <div class="ui-g-5 ui-lg-4 ui-md-2 text-info">
+                                    <span>จังหวัด</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-8 ui-md-4">
+                                    <span>{{userData?.provinceName}}</span>
+                                </div>
+                                <div class="ui-g-5 ui-lg-4 ui-md-2 text-info">
+                                    <span>อีเมล</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-8 ui-md-4 ">
+                                    <span>{{(userData?.email!=null) ? userData.email:'ไม่มีข้อมูล'}}</span>
+                                </div>
+                                <div class="ui-g-5 ui-lg-4 ui-md-2 text-info">
+                                    <span>เบอร์โทรศัพท์</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-8 ui-md-4">
+                                    <span>{{(userData?.tel!=null) ? userData.tel:'ไม่มีข้อมูล'}}</span>
+                                </div>
+                                <div class="ui-g-5 ui-lg-4 ui-md-2 text-info">
+                                    <span>กรุ๊ปเลือด</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-8 ui-md-4 ">
+                                    <span>{{(userData?.blood!=null) ? userData.blood:'ไม่มีข้อมูล'}}</span>
+                                </div>
+                                <div class="ui-g-5 ui-lg-4 ui-md-2 text-info">
+                                    <span>อายุ</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-8 ui-md-4 ">
+                                    <span>{{(userData?.age!=null) ? userData.age+' ปี':'ไม่มีข้อมูล'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-lg-5 ui-md-12 ">
+                                <div class="ui-g-5 ui-lg-5 ui-md-2 text-info">
+                                    <span>ยาที่แพ้</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-7 ui-md-4 ">
+                                    <span>{{(userData?.allergyMedicine!=null) ? userData.allergyMedicine:'ไม่มีข้อมูล'}}</span>
+                                </div>
+                                <div class="ui-g-5 ui-lg-5 ui-md-2 text-info">
+                                    <span>โรคประจำตัว</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-7 ui-md-4 ">
+                                    <span>{{(userData?.disease!=null) ? userData.disease:'ไม่มีข้อมูล'}}</span>
+                                </div>
+                            </div>
+                            <div class="ui-g-12 ui-lg-7 ui-md-12">
+                                <div class="ui-g-5 ui-lg-4 ui-md-2 text-info">
+                                    <span>อาหารที่แพ้</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-8 ui-md-4 ">
+                                    <span>{{(userData?.allergyFood!=null) ? userData.allergyFood:'ไม่มีข้อมูล'}}</span>
+                                </div>
+                                <div class="ui-g-5 ui-lg-4 ui-md-2 text-info">
+                                    <span>หมายเหตุ</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-8 ui-md-4 ">
+                                    <span>{{(userData?.other!=null) ? userData.other:'ไม่มีข้อมูล'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-g">
+                            <hr>
+                            <div class="ui-g-12 ui-lg-12 ui-md-12 header-panel">
+                                <span>ผู้ติดต่อกรณีฉุกเฉิน</span>
+                            </div>
+                            <div class="ui-g-12 ui-lg-5 ui-md-5">
+                                <div class="ui-g-5 ui-lg-5 ui-md-5 text-info">
+                                    <span>ชื่อ-นามสกุล</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-7 ui-md-7">
+                                    <span>{{(userData?.emergencyName!=null) ? userData.emergencyName:'ไม่มีข้อมูล'}}</span>
+                                </div>
+                                <div class="ui-g-5 ui-lg-5 ui-md-5 text-info">
+                                    <span>เบอร์โทรศัพท์</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-7 ui-md-7 ">
+                                    <span>{{(userData?.emergencyTel!=null) ? userData.emergencyTel :'ไม่มีข้อมูล'}}</span>
+                                </div>
+                            </div>
+                            <div class="ui-g-12 ui-lg-7 ui-md-7 ">
+                                <div class="ui-g-5 ui-lg-4 ui-md-5 text-info">
+                                    <span>ความสัมพันธ์</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-8 ui-md-7 ">
+                                    <span>{{(userData?.emergencyRelationship!=null) ? userData.emergencyRelationship:'ไม่มีข้อมูล'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="center temple-button font-show ui-button-raised" style="text-align: center">
+                            <p-button type="button" label="แก้ไข" (onClick)='goToEdit()'></p-button>
+                        </div>
+                    </p-panel>
+                    <!-- <div class="ui-g-12 ui-lg-12 ui-md-12">
+                                <div class="temple-button"  style="text-align: center">
+                                    <p-button type="button" label="กลับหน้าหลัก" ></p-button>
+                                </div>
+                        </div> -->
+                </div>
+            </ng-container>
+            <!--ปิด panel 1 ข้อมูลส่วนตัวของผู้ใช้-->
+            <!-- panel 1 ข้อมูลส่วนตัวของพระอาจารย์กรณีเป็น 2 คอลัมน์ -->
+            <ng-template #elseGrid>
+                <div class="ui-g-12 ui-lg-12 ui-md-12">
+                    <p-panel styleClass="panelHeader">
+                        <p-header>
+                            <div class="ui-g-6 ui-lg-6 ui-md-6 header-panel">
+                                <span>ข้อมูลส่วนตัว</span>
+                            </div>
+                        </p-header>
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-lg-4 ui-md-12 img-position">
+                                <div class="set-position-monk"></div>
+                                <img src="{{(userData?.img) ? 'data:image/jpg;base64,'+ userData.img : './assets/images/no-img.png'}}"
+                                    class="img-info" />
+                            </div>
+                            <div class="ui-g-12 ui-lg-8 ui-md-12 set-display">
+                                <div class="ui-g-12 ui-lg-12 ui-md-12">
+                                    <div class="ui-g-12 ui-lg-3 ui-md-2 set-md-hd">
+                                        <span>ชื่อ-นามสกุล :</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-4 " id="name">
+                                        <span>{{(userData) ? userData.titleName +''+ userData.fname+' '+userData.lname : ''}}</span>
+                                    </div>
+                                    <div class="ui-g-5 ui-lg-3 ui-md-2 set-md-hd">
+                                        <span>อายุ :</span>
+                                    </div>
+                                    <div class="ui-g-7 ui-lg-3 ui-md-4">
+                                        <span>{{(userData?.age!=null) ? userData.age:'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                    <div class="ui-g-5 ui-lg-3 ui-md-2 text-info">
+                                        <span>กรุ๊ปเลือด :</span>
+                                    </div>
+                                    <div class="ui-g-7 ui-lg-3 ui-md-4 ">
+                                        <span>{{(userData?.blood!=null ) ? userData.blood:'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                    <div class="ui-g-5 ui-lg-3 ui-md-2 text-info">
+                                        <span>ยาที่แพ้ :</span>
+                                    </div>
+                                    <div class="ui-g-7 ui-lg-3 ui-md-4 ">
+                                        <span>{{(userData?.allergyMedicine!=null) ? userData.allergyMedicine:'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                    <div class="ui-g-5 ui-lg-3 ui-md-2 ui-sm-6 text-info">
+                                        <span>โรคประจำตัว :</span>
+                                    </div>
+                                    <div class="ui-g-7 ui-lg-3 ui-md-4 ui-sm-12  set-md-dt">
+                                        <span>{{(userData?.disease!=null) ? userData.disease:'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                    <div class="ui-g-5 ui-lg-3 ui-md-2 text-info">
+                                        <span>อาหารที่แพ้ :</span>
+                                    </div>
+                                    <div class="ui-g-7 ui-lg-3 ui-md-4 ">
+                                        <span>{{(userData?.allergyFood!=null) ? userData.allergyFood:'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                    <div class="ui-g-4 ui-lg-3 ui-md-2 set-md-hd">
+                                        <span>อาชีพ :</span>
+                                    </div>
+                                    <div class="ui-g-8 ui-lg-3 ui-md-4">
+                                        <span>{{(userData?.job!=null) ? userData.job:'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-3 set-md-hd date">
+                                        <span>วัน/เดือน/ปีบวช :</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-3 set-md-dt">
+                                        <span>{{(userData?.ordianDate!=null) ? (userData.ordianDate | formatTHdate):'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-2 set-md-hd">
+                                        <span>จำพรรษา :</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-4 set-md-dt">
+                                        <span>{{(userData?.ordianNumber!=null) ? userData.ordianNumber:'ไม่มีข้อมูล'}}
+                                            พรรษา</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-2 set-md-hd">
+                                        <span>เบอร์โทรศัพท์ :</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-4 set-md-dt">
+                                        <span>{{(userData?.tel!=null) ? userData.tel:'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-2 set-md-hd">
+                                        <span>อีเมล :</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-9 ui-md-10 set-md-dt">
+                                        <span>{{(userData?.email!=null) ? userData.email:'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-2 set-md-hd">
+                                        <span>ที่อยู่ :</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-9 ui-md-10 set-md-dt">
+                                        <span>{{(userData?.address!=null) ? userData.address+' '+'จังหวัด'+
+                                            userData.provinceName+' '+'รหัสไปรษณีย์'+' '+userData.postalCode : 'ไม่มีข้อมูล'}}</span>
+                                    </div>
+
+                                    <div class="ui-g-5 ui-lg-3 ui-md-2 text-info">
+                                        <span>หมายเหตุ :</span>
+                                    </div>
+                                    <div class="ui-g-7 ui-lg-3 ui-md-4 ">
+                                        <span>{{(userData?.other!=null) ? userData.other:'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12 ui-lg-12 ui-md-12">
+                                    <hr>
+                                    <div class="ui-g-12 ui-lg-12 ui-md-12 header-panel">
+                                        <span>ผู้ติดต่อกรณีฉุกเฉิน</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-2 set-md-hd">
+                                        <span>ชื่อ-นามสกุล :</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-4 " id="emername">
+                                        <span>{{(userData?.emergencyName!=null) ? userData.emergencyName:'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-2 set-md-hd">
+                                        <span>เบอร์โทรศัพท์ :</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-4 set-md-dt">
+                                        <span>{{(userData?.emergencyTel!=null) ? userData.emergencyTel :'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-2 set-md-hd">
+                                        <span>ความสัมพันธ์ :</span>
+                                    </div>
+                                    <div class="ui-g-12 ui-lg-3 ui-md-4  set-md-dt">
+                                        <span>{{(userData?.emergencyRelationship!=null) ? userData.emergencyRelationship:'ไม่มีข้อมูล'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="center font-show temple-button " style="text-align: center">
+                            <p-button type="button" label="แก้ไข" (onClick)='goToEdit()'></p-button>
+                        </div>
+                    </p-panel>
+                </div>
+            </ng-template>
+            <!-- panel 1 ปิดข้อมูลส่วนตัวของพระอาจารย์กรณีเป็น 2 คอลัมน์ -->
+            <!--panel 2 ตารางคอร์สที่ผ่านการอบรบแล้ว (ผู้ใช้) -->
+            <div class="ui-g-12 ui-lg-6 ui-md-12" *ngIf="showRole">
+                <p-panel styleClass="panelHeader">
+                    <p-header>
+                        <div class="ui-g-11 ui-lg-11 ui-md-11 header-panel">
+                            <span>ตารางคอร์สที่ผ่านการอบรมแล้ว</span>
+                        </div>
+                    </p-header>
+                    <div class="ui-g">
+                        <div class="ui-g-2 ui-lg-1 ui-md-1">
+                            <div class="img-checked">
+                                <img src="./assets/images/checked.png">
+                            </div>
+
+                        </div>
+                        <div class="ui-g-10 ui-lg-11 ui-md-11 ">
+                            <span>จำนวนคอร์สที่ผ่านการอบรมแล้ว {{totalGraduatedRecords}} คอร์ส</span>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-12 ui-md-12">
+                            <p-table [columns]="cols" [value]="graduatedcourses" [paginator]="true" [rows]="3"
+                                (onRowSelect)="onRowSelect($event)" selectionMode="single" [responsive]="true"
+                                [(selection)]="selectedCourse" [totalRecords]="totalGraduatedRecords">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th pSortableColumn="stDate">
+                                            วันที่อบรม
+                                            <p-sortIcon field="stDate" ariaLabel="Activate to sort"
+                                                ariaLabelDesc="Activate to sort in descending order"
+                                                ariaLabelAsc="Activate to sort in ascending order">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th pSortableColumn="name">
+                                            ชื่อคอร์ส
+                                            <p-sortIcon field="name" ariaLabel="Activate to sort"
+                                                ariaLabelDesc="Activate to sort in descending order"
+                                                ariaLabelAsc="Activate to sort in ascending order">
+                                            </p-sortIcon>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr [pSelectableRow]="rowData">
+                                        <td *ngFor="let col of columns">
+                                            <div>
+                                                <div style="text-align: center"
+                                                    *ngIf="rowData[col.field] == rowData['stDate'] && rowData['stDate'] != null ;else elseValue">
+                                                    {{rowData['stDate'] | formatTHdate}} -
+                                                    {{rowData['endDate'] | formatTHdate}}</div>
+                                                <ng-template #elseValue>
+                                                    <div style="text-align: center "></div>
+                                                </ng-template>
+                                                <div *ngIf="rowData[col.field] == rowData['name']">{{rowData['name']}}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </p-panel>
+            </div>
+            <!--panel 2 ตารางคอร์สที่อบรมนอก (ผู้ใช้) -->
+            <div class="ui-g-12 ui-lg-6 ui-md-12" *ngIf="showRole">
+                <p-panel styleClass="panelHeader">
+                    <p-header>
+                        <div class="ui-g-11 ui-lg-11 ui-md-11 header-panel">
+                            <span>ตารางคอร์สที่ผ่านการอบรมแล้ว (นอกเหนือจากการอบรมธรรมะของวัดป่าโสมพนัส)</span>
+                        </div>
+                    </p-header>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-12 ui-md-12">
+                            <p-table [columns]="cols" [value]="courseHisList" [paginator]="true" [rows]="3" [responsive]="true">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th>
+                                            ชื่อคอร์ส
+                                        </th>
+                                        <th>
+                                            สถานที่
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr>
+                                        <td>
+                                            <div style="text-align: center">
+                                                {{rowData['courseName']}}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="text-align: center">
+                                                {{rowData['location']}}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </p-panel>
+            </div>
+        </div>

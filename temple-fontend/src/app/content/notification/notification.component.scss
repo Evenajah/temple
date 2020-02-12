@@ -1,0 +1,50 @@
+.menu {
+    margin: 15%;
+}
+
+.wrapper-menu {
+    padding: 0.3vw;
+    width: 100%;
+}
+
+.menu-card {
+    display: block;
+    background: #cdaa54;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.menu-card:hover {
+    background: #b8860b;
+    border-color: #b8860b;
+}
+
+.img-menu {
+    width: 5em;
+}
+
+.text-center {
+    vertical-align: middle;
+    text-align: left;
+    height: 90px;
+    line-height: 90px;
+}
+
+@media only screen and (min-width: 640px) {
+    .img-menu {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+    }
+
+    .text-center {
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    
+}

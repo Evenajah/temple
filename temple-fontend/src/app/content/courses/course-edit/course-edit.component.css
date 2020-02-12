@@ -1,0 +1,12 @@
+.text-info {
+    text-align: right;
+    color: #000 !important;
+  }
+
+  .text-danger.text-invalid {
+    color: red !important;
+    text-align: right;
+}
+.star{
+  color: red;
+}

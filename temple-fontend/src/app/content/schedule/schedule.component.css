@@ -1,0 +1,11 @@
+:host>>>.fc .fc-event {
+    border-width: 5px !important;
+}
+
+:host>>>.fc td.fc-today.fc-day {
+    background-color: #ffeab4 !important;
+}
+
+:host>>>.fc td.fc-today.fc-day-top {
+    background: 0 0 !important;
+}

@@ -1,0 +1,274 @@
+.layout-footer {
+    margin-top: 30px;
+    background-color: #cdaa54;
+    width: 100%;
+    height: 50px;
+}
+
+:host>>>.ui-breadcrumb {
+    border-color: #b8860b !important;
+    background-color: #f1efe9 !important;
+}
+
+.breadcrumb {
+    width: 100%;
+}
+
+:host>>>.ui-breadcrumb ul li:first-child a {
+    color: #675c41;
+}
+
+legend {
+    padding: 5px;
+    background-color: #b8860b;
+    color: #fff;
+}
+
+fieldset {
+    border-color: #b8860b !important;
+    background-color: #f1efe9 !important;
+    border-radius: 5px;
+    border-width: 1px;
+    min-width: 0; 
+    width: 100%; 
+}
+
+:host>>>.del-btn{
+    background-color: red !important;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: #e60101 !important;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+ :host>>>.del-btn:hover {
+    background-color: #ca0000 !important;
+    border: #e60101;
+    border-radius: 5px;
+}  
+
+:host>>>.confirm-temple-btn .ui-button {
+    background-color: #007ad9 !important;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: #007ad9 !important;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+ :host>>>.confirm-temple-btn .ui-button:hover {
+    background-color: #0469b6 !important;
+    border: #007ad9;
+    border-radius: 5px;
+} 
+
+:host>>>.cancle-temple-btn .ui-button {
+    background-color: #777676 !important;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: #777676 !important;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+ :host>>>.cancle-temple-btn .ui-button:hover {
+    background-color: #4e4e4e !important;
+    border: #777676;
+    border-radius: 5px;
+} 
+
+.center {
+    margin: auto;
+}
+
+.text-right {
+    text-align: right;
+    padding-top: inherit;
+}
+
+@media only screen and (max-width: 640px) {
+    .text-right {
+        text-align: left;
+        padding-top: inherit;
+    }
+    textarea{
+        width: 100%;
+    }
+}
+
+:host>>>button.ui-datepicker-trigger.ui-calendar-button.ng-tns-c5-1.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ng-star-inserted {
+    border: 1px solid#b8860b;
+    background: #b8860b;
+}
+
+:host>>>button.ui-datepicker-trigger.ui-calendar-button.ng-tns-c5-1.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ng-star-inserted :hover :not(:focus) {
+    background-color: #cdaa54;
+}
+
+.font-show {
+    font-size: 1.2em;
+}
+
+:host>>>span.ui-fileupload-choose.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left {
+    background-color: #b8860b;
+    border: #b8860b;
+    border-radius: 3px;
+}
+
+:host>>>span.ui-fileupload-choose.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left:hover {
+    background-color: #cdaa54;
+    border: #b8860b;
+    border-radius: 3px;
+}
+
+:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-state-disabled {
+    background-color: #b8860b;
+    border: #b8860b;
+    border-radius: 3px;
+}
+
+:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-state-disabled:hover {
+    background-color: #cdaa54;
+    border: #b8860b;
+    border-radius: 3px;
+}
+
+:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only {
+    background-color: #b8860b;
+    border: #b8860b;
+    border-radius: 3px;
+}
+
+:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only:hover {
+    background-color: #cdaa54;
+    border: #b8860b;
+    border-radius: 3px;
+}
+
+:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left {
+    background-color: #b8860b;
+    border: #b8860b;
+    border-radius: 3px;
+}
+
+:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left:hover {
+    background-color: #cdaa54;
+    border: #b8860b;
+    border-radius: 3px;
+}
+
+:host>>>.ui-toast .ui-toast-message {
+    background: #f0e6ce;
+}
+
+:host>>>a.ui-toast-close-icon.pi.pi-times.ng-tns-c8-4.ng-star-inserted {
+    color: #675c41;
+}
+
+* {
+    color: #675c41;
+}
+
+.text-danger.text-invalid {
+    color: red !important;
+}
+.text-danger.text-invalid-2 {
+    color: red !important;
+    font-size: 14px;
+}
+
+.text-left {
+    padding-left: 15px;
+    text-align: left;
+    font-size: 1em;
+}
+
+:host>>>.ui-radiobutton-box.ui-widget.ui-state-default.ui-state-active {
+    background-color: #b8860b !important;
+    border: #b8860b !important;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.radio{
+    padding-right: 5px;
+    
+}
+
+.margin-top-bottom {
+    margin: 20px
+}
+
+.header-panel{
+    font-weight: bold;
+    font-size: 15px;
+}
+
+hr{
+    background-color: #b8860b;
+    width: 80%;
+    height: 3px;
+    margin: 0px;
+}
+
+
+@media screen and (min-width: 1024px)  {
+    .img-info{
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 1023px)  {
+    .img-info{
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .img-info{
+        width: 200px;
+        height: 200px;
+    }
+    .text-right {
+        text-align: left;
+        padding-top: inherit;
+    }
+    textarea{
+        width: 100%;
+    }
+}
+
+
+#profile {
+    display: none;
+}
+
+.btn-upload {
+    margin-top: 15px;
+}
+
+.img-info {
+    object-fit: cover;
+    object-position: 100% 50; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2px;
+    /* box-shadow: 5px 5px 1px #353434; */
+}
+
+.star{
+    color: red;
+}
+.text-info {
+    text-align: right;
+    color: #000000 !important;
+ }

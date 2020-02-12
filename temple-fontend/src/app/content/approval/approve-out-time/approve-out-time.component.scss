@@ -1,0 +1,41 @@
+:host>>>.ui-dropdown {
+    display: block !important;
+    margin-left: auto !important;
+}
+
+.table-grid {
+    width: 10%;
+}
+
+.content-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+.text-left{
+text-align: left;
+}
+
+@media only screen and (max-width: 610px) {
+    .table-grid {
+        width: 20%;
+    }
+
+}
+:host>>>.cancel-temple-btn .ui-button {
+    background-color: #777676 !important;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: #777676 !important;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+ :host>>>.cancel-temple-btn .ui-button:hover {
+    background-color: #4e4e4e !important;
+    border: #777676;
+    border-radius: 5px;
+} 

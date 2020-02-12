@@ -1,0 +1,55 @@
+<ng-container *ngIf="showDashboardRole('monk')">
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <h1 style="text-align: center">สรุปผลข้อมูล</h1>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <div class="line"></div>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-6 ">
+            <p-chart type="doughnut" [data]="gender" [options]="genderOptions"></p-chart>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-6">
+            <p-chart type="doughnut" [data]="transport" [options]="transportOptions"></p-chart>
+        </div>
+
+        <div class="ui-g-12 ui-md-0 ui-lg-3"></div>
+        <div class="ui-g-12 ui-md-12 ui-lg-6">
+            <p-chart type="bar" [data]="region" [options]="regionOptions" (onDataSelect)="selectData($event)"></p-chart>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="showDashboardRole('user')">
+    <div class="ui-g ">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <h1 style="text-align: center">สรุปผลข้อมูลคอร์ส</h1>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <div class="line"></div>
+        </div>
+        <div class="ui-g-12 ui-md-0 ui-lg-3"></div>
+        <div class="ui-g-6 ui-md-12 ui-lg-6 ui-sm-12">
+            <p-chart type="doughnut" [data]="courseHistory" [options]="courseHistoryOption"></p-chart>
+        </div>
+    </div>
+</ng-container>
+
+<p-dialog [header]="TitleChartRegion" [modal]="true" [(visible)]="display" [blockScroll]='true'
+    [contentStyle]="{ 'max-height': '20vh','width': '25vw'}">
+    <p-table [value]="province">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>จังหวัด</th>
+                <th>จำนวนผู้ที่ได้เข้าอบรม</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-car>
+            <tr>
+                <td>{{car.province}}</td>
+                <td class="text-right">{{car.totalMemberHasCourse}}</td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+</p-dialog>

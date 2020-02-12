@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="ui-g">
+        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+            <div style="text-align:center">
+                <h1>อนุมัติผ่านหลักสูตร {{nameCourse}}</h1>
+                <div *ngIf="totalRecords == 0">( ไม่มีนักเรียนที่ต้องอนุมัติผ่านหลักสูตร )</div>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+            <div class="line"></div>
+        </div>
+        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+            <app-list-allow [cols]="cols" [member]="member" [option]='option' (listData)="showDialog($event)" [fieldId]='fieldId' [disbtn] ="btnrej"></app-list-allow>
+        </div>
+    </div>
+</div>
+<p-confirmDialog [style]="{width: '50vw'}" #cd>
+    <p-footer>
+        <button type="button" pButton  label="ยืนยัน" (click)="cd.accept()" class="ui-button-raised ui-button-info"></button>
+        <button type="button" pButton  label="ยกเลิก" (click)="cd.reject()" class="ui-button-raised ui-button-secondary"></button>
+    </p-footer>
+</p-confirmDialog>

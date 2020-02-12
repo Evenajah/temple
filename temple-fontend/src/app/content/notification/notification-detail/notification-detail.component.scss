@@ -1,0 +1,36 @@
+
+:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only {
+    background-color: #b8860b;
+    border: #b8860b;
+    border-radius: 3px;
+}
+.aa {
+    margin: 0 auto;
+}
+
+.ui-fluid .ui-button {
+    width: 100%;
+    margin-bottom: 2mm;
+}
+
+:host>>>.ui-table .ui-table-tbody>tr>td {
+    word-wrap: break-word;
+}
+.star{
+    color: red;
+}
+.form-input>.ui-g-4{
+    text-align: right;
+}
+.form-input>.ui-g-8{
+    text-align: left;
+}
+.text-right{
+    text-align: right;
+}
+.text-left{
+    text-align: left;
+}
+.text-center{
+    text-align: center;
+}

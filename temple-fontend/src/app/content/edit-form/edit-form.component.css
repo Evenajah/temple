@@ -1,0 +1,237 @@
+.margin-top-bottom {
+    margin: 20px
+}
+
+:host>>>.del-btn{
+    background-color: red !important;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: #e60101 !important;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+ :host>>>.del-btn:hover {
+    background-color: #ca0000 !important;
+    border: #e60101;
+    border-radius: 5px;
+}  
+
+:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only {
+    background-color: #b8860b;
+    border: #b8860b;
+    border-radius: 3px;
+}
+
+.layout-content {
+    background-color: #fff;
+    border-radius: 1em;
+    border: 1px solid #b8860b;
+    margin-left: 17px;
+    margin-right: 17px;
+    display: flex;
+}
+
+.layout-footer {
+    margin-top: 30px;
+    background-color: #cdaa54;
+    width: 100%;
+    height: 50px;
+}
+
+:host>>>.confirm-temple-btn .ui-button {
+    background-color: #007ad9 !important;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: #007ad9 !important;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+ :host>>>.confirm-temple-btn .ui-button:hover {
+    background-color: #0469b6 !important;
+    border: #007ad9;
+    border-radius: 5px;
+} 
+
+:host>>>.clear-temple-btn .ui-button {
+    background-color: #e91224 !important;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: #e91224 !important;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+ :host>>>.clear-temple-btn .ui-button:hover {
+    background-color: #bd0f1e !important;
+    border: #e91224;
+    border-radius: 5px;
+}
+
+:host>>>.cancel-temple-btn .ui-button {
+    background-color: #777676 !important;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: #777676 !important;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+ :host>>>.cancel-temple-btn .ui-button:hover {
+    background-color: #4e4e4e !important;
+    border: #777676;
+    border-radius: 5px;
+} 
+
+
+.breadcrumb {
+    width: 100%;
+}
+
+:host>>>.temple-button .ui-button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+:host>>>.ui-radiobutton .ui-radiobutton-box.ui-state-active:not(.ui-state-disabled):hover {
+    border-color: #9e7309;
+    background-color: #9e7309;
+}
+
+
+:host>>>.ui-breadcrumb ul li:first-child a {
+    color: #675c41;
+}
+
+:host>>>a.ui-toast-close-icon.pi.pi-times.ng-tns-c8-4.ng-star-inserted {
+    color: #675c41;
+}
+
+* {
+    color: #675c41;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+    padding-top: inherit;
+}
+
+@media screen and (min-width: 1024px)  {
+    .img-info{
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 1023px)  {
+    .img-info{
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .img-info{
+        width: 200px;
+        height: 200px;
+    }
+    .text-right {
+        text-align: left;
+        padding-top: inherit;
+    }
+    textarea{
+        width: 100%;
+    }
+}
+
+.img-info {
+    object-fit: cover;
+    object-position: 100% 50; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* box-shadow: 5px 5px 1px #353434; */
+    border-radius: 2px;
+}
+
+.text-danger.text-invalid {
+    color: red !important;
+}
+
+.text-left {
+    padding-left: 15px;
+    text-align: left;
+    font-size: 1em;
+}
+
+:host>>>.ui-radiobutton .ui-radiobutton-box.ui-state-active {
+    border-color: #9e7309;
+    background-color: #b8860b;
+}
+
+fieldset {
+    border-color: #b8860b !important;
+    background-color: #f1efe9 !important;
+    border-radius: 5px;
+    border-width: 1px;
+    min-width: 0; 
+    width: 100%; 
+}
+
+
+#profile {
+    display: none;
+}
+
+.btn-upload {
+    margin-top: 15px;
+}
+
+:host>>>button.ui-datepicker-trigger.ui-calendar-button.ng-tns-c7-1.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ng-star-inserted {
+    border: 1px solid#b8860b;
+    background: #b8860b;
+}
+
+:host>>>button.ui-datepicker-trigger.ui-calendar-button.ng-tns-c7-1.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ng-star-inserted:hover :not(:focus) {
+    background-color: #cdaa54;
+}
+
+.radio{
+    padding-right: 5px;
+    
+}
+
+hr{
+    background-color: #b8860b;
+    width: 80%;
+    height: 3px;
+    margin: 0px;
+}
+
+
+.font-show {
+    font-size: 1.2em;
+}
+
+legend {
+    padding: 5px;
+    background-color: #b8860b;
+    color: #fff;
+}
+
+.star{
+    color: red;
+}
+
+
+

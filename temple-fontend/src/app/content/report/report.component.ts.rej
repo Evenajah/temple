@@ -1,0 +1,9 @@
+diff a/temple-fontend/src/app/content/report/report.component.ts b/temple-fontend/src/app/content/report/report.component.ts	(rejected hunks)
+@@ -11,6 +11,7 @@
+ export class ReportComponent implements OnInit {
+ 
+   cols: any[];
++  data: any[];
+   filteredCourse: any[];
+   public course: any[];
+ 

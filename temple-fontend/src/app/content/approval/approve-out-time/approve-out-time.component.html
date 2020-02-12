@@ -1,0 +1,116 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<!-- <div class="ui-g">
+  <div class="ui-g-2">
+  </div>
+  <div class="ui-g-12 ui-lg-8">
+    <div class="ui-g-6 ui-lg-3 ui-md-6 text-right">
+      <b>ชื่อ-นามสกุล :</b>
+    </div>
+    <div class="ui-g-6 ui-lg-3 ui-md-6  text-left">
+      <span>
+        {{(detail.displayName) ? detail.displayName: 'ไม่มีข้อมูล'}}
+      </span>
+    </div>
+    <div class="ui-g-6 ui-lg-3 ui-md-6 text-right">
+      <b> การเดินทาง :</b>
+    </div>
+    <div class="ui-g-6 ui-lg-3 ui-md-6 text-left">
+      <span>
+        {{(detail.transportationName) ? detail.transportationName: 'ไม่มีข้อมูล'}}
+      </span>
+    </div>
+    <div class="ui-g-6 ui-lg-3 ui-md-6 text-right">
+      <b>รายละเอียด :</b>
+    </div>
+    <div class="ui-g-6 ui-lg-3 ui-md-6  text-left">
+      <span>
+         {{(detail.courseDetail) ? detail.courseDetail: 'ไม่มีข้อมูล'}}
+      </span>
+    </div>
+    <div class="ui-g-6 ui-lg-3 ui-md-6 text-right">
+      <b>วันเรียน :</b>
+    </div>
+    <div class="ui-g-6 ui-lg-3 md-6  text-left">
+      <span>
+          {{(detail?.stDate) ? (detail.stDate | formatTHdate) : 'ไม่มีข้อมูล'}} -
+        {{(detail?.endDate) ? (detail?.endDate | formatTHdate) : 'ไม่มีข้อมูล'}}
+      </span>
+    </div>
+    <div class="ui-g-6 ui-lg-3 ui-md-6 text-right ">
+      <b>เหตุผล :</b>
+    </div>
+    <div class="ui-g-6 ui-lg-3 ui-md-6 text-left">
+      <span>
+        {{(detail.detail) ? detail.detail: 'ไม่มีข้อมูล'}}
+      </span>
+    </div>
+  </div>
+</div> -->
+<div class="ui-g">
+  <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
+      <div class="container" >
+          <p-card>
+              <div class="ui-g">
+                  <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+                      <label><b>ชื่อ-นามสกุล </b></label></div>
+                  <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+                    {{(detail.displayName) ? detail.displayName: 'ไม่มีข้อมูล'}}
+                  </div>
+                  <div class="ui-g-12 ui-lg- ui-md-2 ui-sm-12">
+                      <label><b>การเดินทาง</b></label></div>
+                  <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+                    {{(detail.transportationName) ? detail.transportationName: 'ไม่มีข้อมูล'}}
+                  </div>
+                  <div class="ui-g-12 ui-lg- ui-md-2 ui-sm-12">
+                      <label><b>รายละเอียด</b></label></div>
+                  <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+                    {{(detail.courseDetail) ? detail.courseDetail: 'ไม่มีข้อมูล'}}
+                  </div>
+                  <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+                      <label><b>วันเรียน</b></label></div>
+                  <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+                    {{(detail?.stDate) ? (detail.stDate | formatTHdate) : 'ไม่มีข้อมูล'}} -
+                    {{(detail?.endDate) ? (detail?.endDate | formatTHdate) : 'ไม่มีข้อมูล'}}                  
+                  </div>
+
+                  <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+                      <label><b>เหตุผล</b></label></div>
+                  <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+                    {{(detail.detail) ? detail.detail: 'ไม่มีข้อมูล'}}
+
+                  </div>
+                  </div>
+          </p-card>
+      </div>
+
+<br>
+
+<div class="ui-g">
+  <div class="ui-g-12">
+    <div class="content-center">
+      <p-button *ngIf="showWhenApproveForm()" label="ไม่อนุมัติ" styleClass="button-reject " (onClick)=sentData(0)>
+      </p-button>
+      &nbsp;
+      <p-button label="อนุมัติ" styleClass="button-success" (onClick)=sentData(1)></p-button>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<p-toast closable="false" position="center" key="ApproveAlertMessage" [modal]="true" 
+  [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center">
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12">
+        <button type="button" pButton [label]=messageback class="ui-button-success" [routerLink]=urlback></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

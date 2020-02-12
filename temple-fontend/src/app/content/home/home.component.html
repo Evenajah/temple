@@ -1,0 +1,275 @@
+<ngx-spinner></ngx-spinner>
+<div class="wrapper-menu">
+    <div class="ui-g">
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/profile',userId]"
+            *ngIf="showHomeMenu('user','monk')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/student.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8 ">
+                        <div class="text-center">ข้อมูลส่วนตัว</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/courses']" *ngIf="showHomeMenu('user')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/book.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">ลงทะเบียนเรียน</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/schedule']" *ngIf="showHomeMenu('user')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/calendar.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">ตารางเรียน</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/schedule']" *ngIf="showHomeMenu('monk')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/calendar.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">ตารางสอน</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/approval']" *ngIf="showHomeMenu('monk')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/clipboard.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">อนุมัติพิเศษ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/manageCourse']" *ngIf="showHomeMenu('admin')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/library.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">จัดการคอร์ส</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/manageCourseForMonk']"
+            *ngIf="showHomeMenu('monk')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/library.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">จัดการคอร์ส</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/']" *ngIf="showHomeMenu('admin')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/notebook.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">จัดการทะเบียนเรียน</div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/users']" *ngIf="showHomeMenu('admin')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/teamwork.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">จัดการสมาชิก</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/manageTitlename']" *ngIf="showHomeMenu('admin')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/id-card.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">จัดการคำนำหน้า</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/location']" *ngIf="showHomeMenu('admin')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/temple.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">จัดการสถานที่</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/baggages']" *ngIf="showHomeMenu('admin')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/lockers.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">จัดการตู้สัมภาระ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/storage']" *ngIf="showHomeMenu('admin')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/backpack.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">จัดการสัมภาระ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/baggages']" *ngIf="showHomeMenu('user')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/lockers.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">สัมภาระ</div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/managepasscourse']" *ngIf="showHomeMenu('monk')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/scholarship.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">อนุมัติการผ่านหลักสูตร</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/courseOutTime']"
+            *ngIf="showHomeMenu('user') && total >= 5">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/alarm-clock.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">ลงทะเบียนเรียนนอกเวลา</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/transportation']" *ngIf="showHomeMenu('admin')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/school-bus.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">จัดการการเดินทาง</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/report']" *ngIf="showHomeMenu('admin')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/report.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">ออกรายงาน</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/approvalCourseOutTime']"
+            *ngIf="showHomeMenu('monk') ">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/hourglass.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">อนุมัตินอกเวลา</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/report']" *ngIf="showHomeMenu('monk')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/report.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">ออกรายงาน</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/dashboard']" *ngIf="showHomeMenu('user','monk')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/Dashboard.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">สรุปผลข้อมูล</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/notification']" *ngIf="showHomeMenu('user','monk')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/notification.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">แจ้งเตือน</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

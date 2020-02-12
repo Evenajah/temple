@@ -1,0 +1,365 @@
+<ngx-spinner></ngx-spinner>
+<p-toast [style]="{ marginTop: '80px' }"></p-toast>
+<div class="ui-g">
+  <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+    <p-tabView (onChange)="closeMessage()">
+      <!-- แท็บที่ 1 คอร์สที่ยังไม่ได้ลงทะเบียน -->
+      <p-tabPanel header="คอร์สทั้งหมด">
+        <div style="text-align:center">
+          <h1>ตารางคอร์ส</h1>
+          <div *ngIf="totalRecords == 0">
+            ( ไม่มีคอร์สที่ยังไม่ได้ลงทะเบียน )
+          </div>
+        </div>
+        <div class="line"></div>
+        <div class="ui-g">
+          <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+            <p-confirmDialog [style]="{ width: '50vw' }" #cd>
+              <p-footer>
+                <button type="button" pButton label="ยืนยัน" (click)="cd.accept()"
+                  class="ui-button-raised ui-button-info"></button>
+                <button type="button" pButton label="ยกเลิก" (click)="cd.reject()"
+                  class="ui-button-raised ui-button-secondary"></button>
+              </p-footer>
+            </p-confirmDialog>
+            <p-table #dt [columns]="cols" [value]="courses" [paginator]="true" [rows]="5" [responsive]="true"
+              selectionMode="single" [(selection)]="selectedCourse" (onRowSelect)="onRowSelect($event)"
+              [totalRecords]="totalRecords">
+              <ng-template pTemplate="caption">
+                <div class="ui-g ui-fluid">
+                  <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
+                    <div class="ui-inputgroup">
+                      <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                      <input type="text" pInputText placeholder="ค้นหา" (input)="
+                          dt.filterGlobal($event.target.value, 'contains') " />
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th pSortableColumn="stDate">
+                    วันที่
+                    <p-sortIcon field="stDate" ariaLabel="Activate to sort"
+                      ariaLabelDesc="Activate to sort in descending order"
+                      ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                  </th>
+                  <th pSortableColumn="name" class="ui-p-4">
+                    ชื่อคอร์ส
+                    <p-sortIcon field="name" ariaLabel="Activate to sort"
+                      ariaLabelDesc="Activate to sort in descending order"
+                      ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                  </th>
+                  <th pSortableColumn="location" class="ui-p-5">
+                    สถานที่
+                    <p-sortIcon field="location" ariaLabel="Activate to sort"
+                      ariaLabelDesc="Activate to sort in descending order"
+                      ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                  </th>
+                  <th pSortableColumn="conditionMin" class="ui-p-6">
+                    หมายเหตุ
+                    <p-sortIcon field="conditionMin" ariaLabel="Activate to sort"
+                      ariaLabelDesc="Activate to sort in descending order"
+                      ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                  </th>
+                  <th class="ui-p-6">
+                    สถานะ
+                  </th>
+                  <th></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData">
+                  <td *ngFor="let col of columns">
+                    <div>
+                      <div style="height: 15px" *ngIf="rowData['mhcStatus'] == 2"></div>
+                      <div *ngIf="rowData[col.field] == rowData['stDate']" style="text-align: center">
+                        {{ rowData['stDate'] | formatTHdate }} -
+                        {{ rowData['endDate'] | formatTHdate }}
+                      </div>
+                      <div *ngIf="
+                          rowData[col.field] == rowData['name'] &&
+                          col.field == 'name'
+                        ">
+                        {{ rowData['name'] }}
+                      </div>
+                      <div *ngIf="
+                          rowData[col.field] == rowData['locationName'] &&
+                          col.field == 'locationName'
+                        " style="text-align: center">
+                        {{ rowData['locationName'] }}
+                      </div>
+                      <div *ngIf="
+                          rowData[col.field] == rowData['conditionMin'] &&
+                          col.field == 'conditionMin'
+                        " style="text-align: center">
+                        ต้องผ่านอย่างน้อย {{ rowData['conditionMin'] }} คอร์ส
+                      </div>
+                      <div *ngIf="
+                          rowData[col.field] == rowData['status'] &&
+                          col.field == 'status'
+                        " style="text-align: center">
+                        {{ rowData['status'] }}
+                      </div>
+                      <div style="height: 15px" *ngIf="rowData['mhcStatus'] == 2"></div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="ui-g" *ngIf="
+                        rowData['saStatus'] !== '2' &&
+                        rowData['canRegister'] === 1 &&
+                        rowData['canRegister'] !== 0
+                      ">
+                      <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 btn-center"
+                        *ngIf="total >= rowData['conditionMin']">
+                        <button pButton type="button" label="สมัคร" (click)="rgCourse(rowData['id'])"
+                          class="ui-button-raised"></button>
+                      </div>
+                      <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 btn-center"
+                        *ngIf="total < rowData['conditionMin']">
+                        <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-warning raised"
+                          (click)="saCourse(rowData['id'])"></button>
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 btn-center" *ngIf="
+                        rowData['saStatus'] === '2' &&
+                        rowData['canRegister'] === 0
+                      ">
+                      <button pButton type="button" label="ยกเลิกการขออนุมัติพิเศษ"
+                        class="ui-button-warning ui-button-raised"
+                        (click)="cancelApprovalCourse(rowData['id'])"></button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </p-tabPanel>
+      <!------- แท็บที่ 2 คอร์สที่กำลังศึกษา ------->
+      <p-tabPanel header="คอร์สที่กำลังศึกษา">
+        <div style="text-align:center">
+          <h1>ตารางคอร์สที่กำลังศึกษา</h1>
+          <div *ngIf="totalStudyRecords == 0">( ไม่มีคอร์สที่กำลังศึกษา )</div>
+        </div>
+        <div class="line"></div>
+        <div class="ui-g">
+          <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+            <p-toast [style]="{ marginTop: '80px' }"></p-toast>
+            <!-- <p-table #sdt [columns]="cols2" [value]="studyingcourses" [paginator]="true" [rows]="5" [responsive]="true"
+              selectionMode="single" [(selection)]="selectedCourse"
+              [totalRecords]="totalStudyRecords"> -->
+            <p-table #sdt [columns]="cols2" [value]="studyingcourses" [paginator]="true" [rows]="5" [responsive]="true"
+              [totalRecords]="totalStudyRecords">
+              <ng-template pTemplate="caption">
+                <div class="ui-g ui-fluid">
+                  <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
+                    <div class="ui-inputgroup">
+                      <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                      <input type="text" pInputText placeholder="ค้นหา" (input)="
+                          sdt.filterGlobal($event.target.value, 'contains')
+                        " />
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th [pSortableColumn]="columns.date">
+                    วันที่
+                    <p-sortIcon [field]="columns.date"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="name" class="ui-p-4">
+                    ชื่อคอร์ส
+                    <p-sortIcon field="name" ariaLabel="Activate to sort"
+                      ariaLabelDesc="Activate to sort in descending order"
+                      ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                  </th>
+                  <th class="ui-p-6">
+                    สถานะ
+                  </th>
+                  <th></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData">
+                  <td *ngFor="let col of columns">
+                    <div>
+                      <div style="height: 15px"></div>
+                      <div *ngIf="rowData[col.field] == rowData['stDate']" style="text-align: center">
+                        {{ rowData['stDate'] | formatTHdate }} -
+                        {{ rowData['endDate'] | formatTHdate }}
+                      </div>
+                      <div *ngIf="
+                          rowData[col.field] == rowData['name'] &&
+                          col.field == 'name'
+                        ">
+                        {{ rowData['name'] }}
+                      </div>
+                      <div *ngIf="
+                          rowData[col.field] == rowData['status'] &&
+                          col.field == 'status'
+                        " style="text-align: center">
+                        {{ rowData['status'] }}
+                      </div>
+                      <div style="height: 15px"></div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 btn-center">
+                        <button pButton type="button" label="รายละเอียด" (click)="onSelectCourse(rowData['id'])"
+                          class="ui-button-raised"></button>
+                    </div>
+                    <div style="height: 15px"></div>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+
+  <!--Dialog assign course-->
+  <p-dialog (onHide)="onCancle('as')" header="ข้อมูลสมัครคอร์สอบรม" [(visible)]="displayRegisterDialog"
+    [responsive]="true" showEffect="fade" [modal]="true" [contentStyle]="{ 'max-height': '500px' }">
+    <div [formGroup]="assignFormCourse">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-lg-12 ui-md-12">
+          <div class="ui-g">
+            <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="formAssignError.transportation == ''">
+              <label>การเดินทางมาอบรม<label class="redstar">*</label></label>
+            </div>
+            <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid"
+              *ngIf="formAssignError.transportation != ''">
+              <label>{{ formAssignError.transportation }}</label>
+            </div>
+            <div class="ui-g-12 ui-lg-8 ui-md-8">
+              <p-dropdown [options]="transports" optionLabel="name" value="id" [autoWidth]="false"
+                formControlName="transportation" [style]="{ width: '85%' }" placeholder="กรุณาเลือกการเดินทางมาอบรม">
+              </p-dropdown>
+            </div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formAssignError.experience">
+              <label>ประสบการณ์ปฎิบัติธรรมที่ผ่านมา<label class="redstar">*</label></label>
+            </div>
+
+            <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid" *ngIf="formAssignError.experience">
+              <label>{{ formAssignError.experience }}</label>
+            </div>
+            <div class="ui-g-12 ui-lg-8 ui-md-8">
+              <textarea [rows]="3" [cols]="30" pInputTextarea formControlName="experience"></textarea>
+              <div class="text-danger text-invalid">
+                <label>{{ formLengthError.experience }}</label>
+              </div>
+            </div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formAssignError.expected">
+              <label>ความคาดหวังในครั้งนี้<label class="redstar">*</label></label>
+            </div>
+            <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid" *ngIf="formAssignError.expected">
+              <label>{{ formAssignError.expected }}</label>
+            </div>
+            <div class="ui-g-12 ui-lg-8 ui-md-8">
+              <textarea [rows]="3" [cols]="30" pInputTextarea formControlName="expected"></textarea>
+              <div class="text-danger text-invalid">
+                <label>{{ formLengthError.expected }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p-footer>
+      <div>
+        <button type="button" pButton (click)="onSubmitAssign('as')" label="ยืนยัน"
+          class="ui-button-raised ui-button-info"></button>
+        <button type="button" pButton (click)="onCancle('as')" label="ยกเลิก"
+          class="ui-button-raised ui-button-secondary"></button>
+      </div>
+    </p-footer>
+  </p-dialog>
+  <!--Dialog approve course-->
+  <p-dialog (onHide)="onCancle('ap')" header="ข้อมูลคำขออนุมัติพิเศษสำหรับสมัครคอร์ส" [(visible)]="displayApproveDialog"
+    [responsive]="true" showEffect="fade" [modal]="true">
+    <div [formGroup]="approveFormCourse">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-lg-12 ui-md-12">
+          <div class="ui-g">
+            <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formApproveError.transportation">
+              <label>การเดินทางมาอบรม<label class="redstar">*</label></label>
+            </div>
+            <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid"
+              *ngIf="formApproveError.transportation">
+              <label>{{ formApproveError.transportation }}</label>
+            </div>
+            <div class="ui-g-12 ui-lg-8 ui-md-8">
+              <p-dropdown [options]="transports" optionLabel="name" value="id" [autoWidth]="false"
+                formControlName="transportation" [style]="{ width: '85%' }" placeholder="กรุณาเลือกการเดินทางมาอบรม">
+              </p-dropdown>
+            </div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formApproveError.experience">
+              <label>ประสบการณ์ปฎิบัติธรรมที่ผ่านมา<label class="redstar">*</label></label>
+            </div>
+            <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid" *ngIf="formApproveError.experience">
+              <label>{{ formApproveError.experience }}</label>
+            </div>
+            <div class="ui-g-12 ui-lg-8 ui-md-8">
+              <textarea [rows]="3" [cols]="25" pInputTextarea formControlName="experience"></textarea>
+              <div class="text-danger text-invalid">
+                <label>{{ formLengthError.expected }}</label>
+              </div>
+            </div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formApproveError.expected">
+              <label>ความคาดหวังในครั้งนี้<label class="redstar">*</label></label>
+            </div>
+            <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid" *ngIf="formApproveError.expected">
+              <label>{{ formApproveError.expected }}</label>
+            </div>
+            <div class="ui-g-12 ui-lg-8 ui-md-8">
+              <textarea [rows]="3" [cols]="25" pInputTextarea formControlName="expected"></textarea>
+              <div class="text-danger text-invalid">
+                <label>{{ formLengthError.expected }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g">
+        <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formApproveError.detail">
+          <label>รายละเอียดคำขออนุมัติ<label class="redstar">*</label></label>
+        </div>
+        <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid" *ngIf="formApproveError.detail">
+          <label>{{ formApproveError.detail }}</label>
+        </div>
+        <div class="ui-g-12 ui-lg-8 ui-md-8">
+          <textarea [rows]="3" [cols]="25" pInputTextarea id="name" formControlName="detail"
+            placeholder="ดิฉัน/กระผมมีความสนใจในคอร์ส...นี้เป็นอย่างมาก เนื่องจาก..."></textarea>
+          <div class="text-danger text-invalid">
+            <label>{{ formLengthError.detail }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p-footer>
+      <div>
+        <button type="button" pButton (click)="onSubmitApprove('ap')" label="ยืนยัน"
+          class="ui-button-raised ui-button-info"></button>
+        <button type="button" pButton (click)="onCancle('ap')" label="ยกเลิก"
+          class="ui-button-raised ui-button-secondary"></button>
+      </div>
+    </p-footer>
+  </p-dialog>
+</div>

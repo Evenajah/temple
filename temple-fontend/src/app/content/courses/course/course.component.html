@@ -1,0 +1,304 @@
+<ngx-spinner></ngx-spinner>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="ui-g">
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
+        <div class="container" *ngIf="showButtonBack('user')">
+            <div style="text-align: center">
+                <h2>{{(course?.name) ? course?.name : '-'}}</h2>
+            </div>
+            <p-card>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+                        <label><b>วันที่</b></label></div>
+                    <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+                        {{(course?.stDate) ? (course.stDate | formatTHdate) : '-'}} -
+                        {{(course?.endDate) ? (course?.endDate | formatTHdate) : '-'}}
+                    </div>
+                    <div class="ui-g-12 ui-lg- ui-md-2 ui-sm-12">
+                        <label><b>รายละเอียด</b></label></div>
+                    <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+                        {{(course?.detail) ? course.detail : '-'}}
+                    </div>
+                    <div class="ui-g-12 ui-lg- ui-md-2 ui-sm-12">
+                        <label><b>ผู้สอน</b></label></div>
+                    <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12">
+                        <span *ngFor="let teach of course?.teacherList let last = last"> {{teach.titleName}} {{teach.fname}}
+                        {{teach.lname}} {{!last?' , ' :''}}</span>
+                    </div>
+                    <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+                        <label><b>สถานที่</b></label></div>
+                    <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+                        {{(course?.locationName) ? course?.locationName : '-'}}
+                    </div>
+
+                    <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+                        <label><b>การเดินทาง</b></label></div>
+                    <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+                        {{(course?.transportation.id == null)? '-' : course?.transportation.name }}
+                        {{(course?.transportation.timePickUp == null)? '' : ' เวลารับ: ' + (course?.transportation.timePickUp | date: 'HH:mm')}}
+                        {{(course?.transportation.timeSend == null)? '' : ' เวลาส่ง: ' + (course?.transportation.timeSend | date: 'HH:mm')}}
+                    </div>
+
+                    <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+                        <label><b>หมายเหตุ</b></label></div>
+                    <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+                        {{(course?.conditionMin != 0)? "ต้องมีคอร์สที่ผ่านอย่างน้อย " + course?.conditionMin + "คอร์ส":"-"}}
+                    </div>
+                    <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+                        <label><b>สถานะ</b></label></div>
+                    <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+                        {{(course?.status) ? course.status : '-'}}</div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-12 " style="margin: 0 auto;">
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-lg-6 ui-md-6 btn-right"
+                                *ngIf="course?.saStatus !== '2' && course?.canRegister === 1 && course?.canRegister !== 0;else elseTemplate">
+                                <div *ngIf="total >= course?.conditionMin">
+                                    <button pButton type="button" label="สมัคร"
+                                        (click)="rgCourse(course['id'])"></button>
+                                </div>
+                                <div *ngIf="total < course?.conditionMin">
+                                    <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-warning"
+                                        (click)="saCourse(course['id'])">
+                                    </button>
+                                </div>
+                            </div>
+                            <ng-template #elseTemplate>
+                                <div class="ui-g-12 ui-lg-6 ui-md-6"></div>
+                            </ng-template>
+                            <div class="ui-g-12 ui-lg-6=7 ui-md-7 btn-right"
+                                *ngIf="course?.saStatus === '2' && course?.canRegister === 0 && course?.no === 0">
+                                <button pButton type="button" label="ยกเลิกการขออนุมัติพิเศษ" class="ui-button-warning"
+                                    (click)="cancelApprovalCourse(course['id'])">
+                                </button>
+                            </div>
+                            <div class="ui-g-12 ui-lg-6=7 ui-md-7 btn-right"
+                                *ngIf="course?.saStatus === '4' && course?.no !== 0">
+                                <button pButton type="button" label="ยกเลิกการขออนุมัตินอกเวลา" class="ui-button-warning"
+                                    (click)="cancelApprovalCourse(course['id'])">
+                                </button>
+                            </div>
+                            <div class="ui-g-12 ui-lg-5 ui-md-5 btn-left ">
+                                <button pButton type="button" label="กลับ" class="button-reject"
+                                    (click)="getBack()">
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </p-card>
+        </div>
+        <!-- ตารางรายชื่อผู้เรียน -->
+        <div class="container" *ngIf="showButtonBack('admin') || showButtonBack('monk')">
+            <p-toast [style]="{marginTop: '80px'}"></p-toast>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                    <div style="text-align:center">
+                        <h1>รายชื่อผู้เรียนคอร์ส {{(course) ? course.name : ''}}</h1>
+                        <div *ngIf="totalMember == null">( ไม่มีนักเรียนที่ลงทะเบียนเรียน )</div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+                <div class="ui-g-12 ui-lg-12 ui-md-12" style="text-align: right">
+                    <!--downloadFile('temple.xls')-->
+                    <button pButton type="button" label="พิมพ์รายชื่อ" (click)="createExcel();"
+                        class="ui-button-success ui-button-raised"></button>
+                </div>
+                <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                    <p-table #dt [value]="memberList" [totalRecords]="totalMember" [paginator]="true" [rows]="5"
+                        [columns]="cols">
+                        <ng-template pTemplate="caption">
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12" style="margin-left: auto;">
+                                    <div class="ui-inputgroup">
+                                        <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                                        <input type="text" pInputText placeholder="ค้นหา"
+                                            (input)="dt.filterGlobal($event.target.value, 'contains')">
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th pSortableColumn="number" style="width: 20%;">
+                                    ลำดับ
+                                    <p-sortIcon field="number" ariaLabel="Activate to sort"
+                                        ariaLabelDesc="Activate to sort in descending order"
+                                        ariaLabelAsc="Activate to sort in ascending order">
+                                    </p-sortIcon>
+                                </th>
+                                <th pSortableColumn="name">
+                                    ชื่อ-นามสกุล
+                                    <p-sortIcon field="fname" ariaLabel="Activate to sort"
+                                        ariaLabelDesc="Activate to sort in descending order"
+                                        ariaLabelAsc="Activate to sort in ascending order">
+                                    </p-sortIcon>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+                            <tr>
+                                <td style="text-align: center;">
+                                    {{rowIndex+1}}
+                                </td>
+                                <td>
+                                    {{rowData.data.titleName}}{{rowData.data.fname}} {{rowData.data.lname}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <p-confirmDialog [style]="{width: '50vw'}" #cd>
+        <p-footer>
+            <button type="button" pButton pButton label="ยืนยัน" (click)="cd.accept()"
+                class="ui-button-raised ui-button-info"></button>
+            <button type="button" pButton pButton label="ยกเลิก" (click)="cd.reject()"
+                class="ui-button-raised ui-button-secondary"></button>
+        </p-footer>
+    </p-confirmDialog>
+    <!--Dialog assign course-->
+    <p-dialog (onHide)="onCancle('as')" header="ข้อมูลสมัครคอร์สอบรม" [(visible)]="displayRegisterDialog"
+        [responsive]="true" showEffect="fade" [modal]="true" [positionTop]="true">
+        <div [formGroup]="assignFormCourse">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-lg-12 ui-md-12">
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formAssignError.transportation">
+                            <label>การเดินทางมาอบรม*</label>
+                        </div>
+                        <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid"
+                            *ngIf="formAssignError.transportation">
+                            <label>{{formAssignError.transportation}}</label>
+                        </div>
+                        <div class="ui-g-12 ui-lg-8 ui-md-8">
+                            <p-dropdown [options]="transports" optionLabel="name" value="id" [autoWidth]="false"
+                                formControlName="transportation" [style]="{'width':'100%'}"
+                                placeholder="กรุณาเลือกการเดินทางมาอบรม">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formAssignError.experience">
+                            <label>ประสบการณ์ปฎิบัติธรรมที่ผ่านมา</label>
+                        </div>
+                        <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid"
+                            *ngIf="formAssignError.experience">
+                            <label>{{formAssignError.experience}}</label>
+                        </div>
+                        <div class="ui-g-12 ui-lg-8 ui-md-8">
+                            <textarea [rows]="5" [cols]="25" pInputTextarea formControlName="experience"></textarea>
+                            <div class="text-danger text-invalid">
+                                <label>{{formLengthError.experience}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formAssignError.expected">
+                            <label>ความคาดหวังในครั้งนี้*F</label>
+                        </div>
+                        <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid"
+                            *ngIf="formAssignError.expected">
+                            <label>{{formAssignError.expected}}</label>
+                        </div>
+                        <div class="ui-g-12 ui-lg-8 ui-md-8">
+                            <textarea [rows]="5" [cols]="25" pInputTextarea formControlName="expected"></textarea>
+                            <div class="text-danger text-invalid">
+                                <label>{{formLengthError.expected}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <div>
+                <button type="button" pButton (click)="onSubmit('as')" label="ยืนยัน"
+                    class="ui-button-raised ui-button-info"></button>
+                <button type="button" pButton (click)="onCancle('as')" label="ยกเลิก"
+                    class="ui-button-raised ui-button-secondary"></button>
+            </div>
+        </p-footer>
+    </p-dialog>
+    <!--Dialog approve course-->
+    <p-dialog (onHide)="onCancle('ap')" header="ข้อความจากระบบ" [(visible)]="displayApproveDialog" [responsive]="true"
+        showEffect="fade" [modal]="true">
+        <div [formGroup]="approveFormCourse">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-lg-12 ui-md-12">
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formApproveError.transportation">
+                            <label>การเดินทางมาอบรม*</label>
+                        </div>
+                        <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid"
+                            *ngIf="formApproveError.transportation">
+                            <label>{{formApproveError.transportation}}</label>
+                        </div>
+                        <div class="ui-g-12 ui-lg-8 ui-md-8">
+                            <p-dropdown [options]="transports" optionLabel="name" value="id" [autoWidth]="false"
+                                formControlName="transportation" [style]="{'width':'100%'}"
+                                placeholder="กรุณาเลือกการเดินทางมาอบรม">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formApproveError.experience">
+                            <label>ประสบการณ์ปฎิบัติธรรมที่ผ่านมา*</label>
+                        </div>
+                        <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid"
+                            *ngIf="formApproveError.experience">
+                            <label>{{formApproveError.experience}}</label>
+                        </div>
+                        <div class="ui-g-12 ui-lg-8 ui-md-8">
+                            <textarea [rows]="3" [cols]="25" pInputTextarea formControlName="experience"></textarea>
+                            <div class="text-danger text-invalid">
+                                <label>{{formLengthError.experience}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formApproveError.expected">
+                            <label>ความคาดหวังในครั้งนี้*</label>
+                        </div>
+                        <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid"
+                            *ngIf="formApproveError.expected">
+                            <label>{{formApproveError.expected}}</label>
+                        </div>
+                        <div class="ui-g-12 ui-lg-8 ui-md-8">
+                            <textarea [rows]="3" [cols]="25" pInputTextarea formControlName="expected"></textarea>
+                            <div class="text-danger text-invalid">
+                                <label>{{formLengthError.expected}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-lg-4 ui-md-4 text-info" *ngIf="!formApproveError.detail">
+                    <label>รายละเอียดคำขออนุมัติ*</label>
+                </div>
+                <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12 text-danger text-invalid" *ngIf="formApproveError.detail">
+                    <label>{{formApproveError.detail}}</label>
+                </div>
+                <div class="ui-g-12 ui-lg-8 ui-md-8">
+                    <textarea [rows]="3" [cols]="25" pInputTextarea id="name" formControlName="detail"
+                        placeholder="ดิฉัน/กระผมมีความสนใจในคอร์ส...นี้เป็นอย่างมาก เนื่องจาก..."></textarea>
+                    <div class="text-danger text-invalid">
+                        <label>{{formLengthError.detail}}</label>
+                    </div>
+                    <!-- <textarea pInputTextarea id="name" [(ngModel)]="specialApprove.detail"></textarea> -->
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <div>
+                <button type="button" pButton (click)="onSubmit('ap')" label="ยืนยัน"
+                    class="ui-button-raised ui-button-info"></button>
+                <button type="button" pButton (click)="onCancle('ap')" label="ยกเลิก"
+                    class="ui-button-raised ui-button-secondary"></button>
+            </div>
+        </p-footer>
+    </p-dialog>

@@ -1,0 +1,49 @@
+<div class="ui-g">
+        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+          <div style="text-align:center">
+            <h1>อนุมัติการผ่านหลักสูตร</h1>
+            <div *ngIf="totalRecords == 0">( ไม่มีคอร์สที่ต้องอนุมัติผ่านหลักสูตร )</div>
+          </div>
+          <div class="line"></div>
+          <div class="container">
+            <div class="ui-g">
+              <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <p-table #dt [columns]="cols" [value]="courses" [paginator]="true" [rows]="5" [responsive]="true" selectionMode="single"
+                  [(selection)]="selectedCourse" (onRowSelect)="onRowSelect($event)" [lazy]="true" (onLazyLoad)="loadData($event)"
+                  [totalRecords]="totalRecords" [loading]="loading">
+                  <ng-template pTemplate="caption">
+                    <div class="ui-g ui-fluid">
+                      <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
+                        <div class="ui-inputgroup">
+                          <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                          <input type="text" pInputText placeholder="ค้นหา"
+                                (input)="dt.filterGlobal($event.target.value, 'contains')">
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      <th *ngFor="let col of columns">
+                        {{col.header}}
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr [pSelectableRow]="rowData">
+                      <td *ngFor="let col of columns">
+                          <div style="height: 10px"></div>
+                        <div *ngIf="rowData[col.field] === rowData['name'] && col.field == 'name'">{{rowData['name']}}</div>
+                        <div *ngIf="rowData[col.field] === rowData['detail'] && col.field == 'detail'">{{rowData['detail']}}</div>
+                        <div *ngIf="rowData[col.field] === rowData['numberOfMembers']" style="text-align: center">{{rowData['numberOfMembers']}}</div>
+                        <div style="height: 10px"></div>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      

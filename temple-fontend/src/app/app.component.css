@@ -1,0 +1,23 @@
+.layout-footer {
+  margin-top: 30px;
+  background-color: #cdaa54;
+  width: 100%;
+  position: static;
+  display: inline-block;
+  vertical-align: top;
+  min-height: 50px;
+}
+
+.layout-wrapper {
+  display: block;
+  min-height: calc(100% - 84px);
+  height: auto !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .layout-wrapper {
+    display: block;
+    min-height: calc(100% - 124px);
+   
+  }
+}

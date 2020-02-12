@@ -1,0 +1,99 @@
+.layout-content {
+    background-color: #fff;
+    border-radius: 1em;
+    border: 1px solid #b8860b;
+    margin-left: 17px;
+    margin-right: 17px;
+    /*display: flex;*/
+}
+
+:host>>>.temple-button .ui-button {
+    background-color: #b8860b !important;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: #b8860b !important;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+:host>>>.temple-button .ui-button:hover {
+    background-color: #cdaa54 !important;
+    border: #b8860b;
+    border-radius: 5px;
+}
+
+:host>>>.center {
+    margin: auto;
+}
+
+:host>>>button.ui-autocomplete-dropdown {
+    background-color: #b8860b !important;
+    border: 1px solid #b8860b !important;
+}
+
+:host>>>.ui-autocomplete-token {
+    background-color: #b8860b !important;
+    border: #b8860b !important;
+}
+
+
+/* :host>>> .ui-state-highlight{
+    background-color: #b8860b !important;
+    border:  #b8860b !important;
+} */
+
+:host>>>.ui-datepicker table td>a.ui-state-active {
+    background-color: #b8860b !important;
+    border: #b8860b !important;
+    color: #ffffff
+}
+
+
+/* dialog header */
+
+:host>>>.ui-dialog .ui-dialog-titlebar {
+    border: 0px !important;
+    background-color: #f0e6ce !important;
+}
+
+
+/* dialog content */
+
+:host>>>.ui-dialog-content.ui-widget-content {
+    border: 0px !important;
+}
+
+
+/* dialog footer */
+
+:host>>>.ui-dialog .ui-dialog-footer {
+    border: 0px !important;
+    background-color: #f1efe9 !important;
+}
+
+:host>>>.ui-table .ui-sortable-column.ui-state-highlight {
+    background-color: #f0e6ce;
+    color: #333333;
+}
+
+:host>>>.ui-table .ui-sortable-column.ui-state-highlight .ui-sortable-column-icon {
+    color: #333333;
+}
+
+:host>>>.ui-toast .ui-toast-message {
+    background: #f0e6ce;
+}
+
+.menu {
+    margin: 15%;
+}
+
+.wrapper-menu {
+    padding: 1.5em;
+    width: 100%;
+}
+
+.margin-bot{
+    margin-bottom: 0.4vh;
+}

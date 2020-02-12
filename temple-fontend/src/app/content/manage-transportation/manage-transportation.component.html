@@ -1,0 +1,207 @@
+<ngx-spinner></ngx-spinner>
+<p-toast [style]="{ marginTop: '80px' }"></p-toast>
+<div class="ui-g">
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+        <p-tabView (onChange)="onTabChange($event)">
+            <!-- --------------------- Tab 2 การเดินทางด้วยวัด ------------------------------>
+            <p-tabPanel header="การเดินทางของวัด">
+                <div style="text-align:center">
+                    <h1>การเดินทางของวัด</h1>
+                </div>
+                <div class="line"></div>
+                <br />
+                <div class="container">
+                    <div class="row">
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12"></div>
+                            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                                <p-table [columns]="colsTemple" [value]="transportTemple" [paginator]="true" [rows]="5"
+                                    [responsive]="true">
+                                    <ng-template pTemplate="caption">
+                                        <div class="ui-g ui-fluid">
+                                            <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12">
+                                                <div style="text-align:left">
+                                                    <button pButton type="button" (click)="showDialogToAdd()"
+                                                        label="เพิ่ม" class="ui-button-info"
+                                                        style="width: 40%"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template pTemplate="header" let-columns>
+                                        <tr>
+                                            <th pSortableColumn='name'>
+                                                ประเภทการเดินทาง
+                                            </th>
+                                            <th pSortableColumn="timePickUp" style="width: 15%;">
+                                                เวลารับ
+                                            </th>
+                                            <th pSortableColumn="timeSend" style="width: 15%;">
+                                                เวลาส่ง
+                                            </th>
+                                            <th>
+                                                <!-- button edit and delete-->
+                                            </th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    {{ rowData["name"] }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    {{ rowData["timePickUp"] | date: "HH:mm" }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    {{ rowData["timeSend"] | date: "HH:mm" }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div style="text-align:center">
+                                                    <button pButton type="button" label="แก้ไข"
+                                                        (click)="showEdit(rowData['id'])" class="ui-button-warning"
+                                                        style="width: 40%;"></button>
+                                                    <button pButton type="button" label="ลบ"
+                                                        (click)="delete(rowData['id'])" class="ui-button-danger"
+                                                        style="width: 40%;margin-left: 5mm"></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <!-- ------------- Tab 1 การเดินทางด้วยตัวเอง ---------------------->
+            <p-tabPanel header="การเดินทางด้วยตัวเอง">
+                <div style="text-align:center">
+                    <h1>การเดินทางด้วยตัวเอง</h1>
+                </div>
+                <div class="line"></div>
+                <br />
+                <div class="container">
+                    <div class="row">
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                                <!-- <p-messages [(value)]="msgs"></p-messages> -->
+                            </div>
+                            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                                <p-table [columns]="cols" [value]="transport" [paginator]="true" [rows]="5"
+                                    [responsive]="true">
+                                    <ng-template pTemplate="caption">
+                                        <div class="ui-g ui-fluid">
+                                            <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12">
+                                                <div style="text-align:left">
+                                                    <button pButton type="button" (click)="showDialogToAdd()"
+                                                        label="เพิ่ม" class="ui-button-info"
+                                                        style="width: 40%"></button>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12">
+                        <div class="ui-inputgroup">
+                          <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                          <input type="text" pInputText placeholder="ค้นหา" id="input"
+                            (keyup)="searchData($event.target.value)">
+                        </div>
+                      </div> -->
+                                        </div>
+                                    </ng-template>
+                                    <ng-template pTemplate="header" let-columns>
+                                        <tr>
+                                            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                                                {{ col.header }}
+                                            </th>
+                                            <th>
+                                                <!-- button edit and delete-->
+                                            </th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                        <tr>
+                                            <td *ngFor="let col of columns">
+                                                {{ rowData[col.field] }}
+                                            </td>
+                                            <td>
+                                                <div style="text-align:center">
+                                                    <button pButton type="button" label="แก้ไข"
+                                                        (click)="showEdit(rowData['id'])" class="ui-button-warning"
+                                                        style="width: 40%;"></button>
+                                                    <button pButton type="button" label="ลบ"
+                                                        (click)="delete(rowData['id'])" class="ui-button-danger"
+                                                        style="width: 40%;margin-left: 5mm"></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>
+<p-dialog header="รายละเอียดการเดินทาง" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+    [style]="{ width: '400px' }" [contentStyle]="{ overflow: 'visible' }" (onHide)="clear()">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12">
+            <div class="ui-g-5" style="text-align: right;">
+                <label>ประเภทการเดินทาง<span class="star">*</span></label>
+            </div>
+            <div class="ui-g-7">
+                <input pInputText [(ngModel)]="newTransportation" width="100%" />
+            </div>
+        </div>
+        <div class="ui-g-12" *ngIf="tabIndex === 0">
+            <div class="ui-g-5" style="text-align: right;">
+                <label>เวลา (รับ)<span class="star">*</span></label>
+            </div>
+            <div class="ui-g-7">
+                <p-calendar [(ngModel)]="timePickUp" [timeOnly]="true" showTime="true" hourFormat="24" [showIcon]="true"
+                    icon="pi pi-clock" [style]="{ width: '60%' }"></p-calendar>
+            </div>
+        </div>
+        <div class="ui-g-12" *ngIf="tabIndex === 0">
+            <div class="ui-g-5" style="text-align: right;">
+                <label>เวลา (ส่ง)<span class="star">*</span></label>
+            </div>
+            <div class="ui-g-7">
+                <p-calendar [(ngModel)]="timeSend" showTime="true" [timeOnly]="true" hourFormat="24" [showIcon]="true"
+                    icon="pi pi-clock" [style]="{ width: '60%' }"></p-calendar>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" *ngIf="displayTransportation" pButton (click)="save()"
+                style="background-color: #007ad9" label="บันทึก" [disabled]="
+          (tabIndex === 0 && (timePickUp === null || timeSend === null)) ||
+          newTransportation === ''
+        "></button>
+            <button class="ui-button-warning" type="button" *ngIf="!displayTransportation" pButton (click)="update()"
+                label="แก้ไข" [disabled]="
+          (tabIndex === 0 && (timePickUp === null || timeSend === null)) ||
+          newTransportation === ''
+        "></button>
+            <button class="ui-button-raised ui-button-secondary" type="button" pButton (click)="clear()"
+                label="ยกเลิก"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '50vw' }" #cd header="Confirmation">
+    <p-footer>
+        <button type="button" pButton label="ยืนยัน" style="background-color: #007ad9" (click)="cd.accept()"></button>
+        <button type="button" pButton label="ยกเลิก" class="ui-button-raised ui-button-secondary"
+            (click)="cd.reject()"></button>
+    </p-footer>
+</p-confirmDialog>

@@ -1,0 +1,91 @@
+<div class="ui-g">
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+    <div style="text-align:center">
+        <h1>ข้อมูลคอร์สทั้งหมด</h1>
+    </div>
+    <div class="line"></div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <p-confirmDialog [style]="{width: '50vw'}" #cd>
+                    <p-footer>
+                        <button type="button" pButton  label="ยืนยัน" (click)="cd.accept()" class="ui-button-info ui-button-raised"></button>
+                        <button type="button" pButton  label="ยกเลิก" (click)="cd.reject()" class="ui-button-secondary ui-button-raised"></button>
+                    </p-footer>
+                </p-confirmDialog>
+                <!-- <p-messages [value]="msgs"></p-messages> -->
+                <p-toast [style]="{marginTop: '80px'}"></p-toast>
+                <p-table #dt [columns]="cols" [value]="courses" [paginator]="true" [rows]="5" [responsive]="true"  selectionMode="single"
+                [totalRecords]="totalRecords" (onRowSelect)="onRowSelect($event)">
+                    <ng-template pTemplate="caption">
+                        <div class="ui-g ui-fluid">
+                            <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
+                                <div class="ui-inputgroup">
+                                    <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                                    <input type="text" pInputText placeholder="ค้นหา" (input)="dt.filterGlobal($event.target.value, 'contains')">
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th pSortableColumn="stDate" >
+                                วันที่
+                                <p-sortIcon field="stDate" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="name" class="ui-p-4">
+                                ชื่อคอร์ส
+                                <p-sortIcon field="name" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="location" class="ui-p-5">
+                                สถานที่
+                                <p-sortIcon field="location" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="conditionMin" class="ui-p-6">
+                                หมายเหตุ
+                                <p-sortIcon field="conditionMin" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="status" class="ui-p-6">
+                                ประเภทคอร์ส
+                                <p-sortIcon field="status" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+                                </p-sortIcon>
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData">
+                            <td *ngFor="let col of columns;" >
+                                <div *ngIf="rowData[col.field] == rowData['stDate']" style="text-align: center">{{rowData['stDate'] | formatTHdate}} - {{rowData['endDate'] | formatTHdate}}</div>
+                                <div *ngIf="rowData[col.field] == rowData['name'] && col.field == 'name'" >{{rowData['name']}}</div>
+                                <div *ngIf="rowData[col.field] == rowData['locationName'] && col.field == 'locationName'" style="text-align: center">{{rowData['locationName']}}</div>
+                                <div *ngIf="rowData[col.field] == rowData['conditionMin'] && col.field == 'conditionMin'" style="text-align: center">ต้องผ่านอย่างน้อย {{rowData['conditionMin']}} คอร์ส</div>
+                                <div *ngIf="rowData[col.field] == rowData['status'] && col.field == 'status'" style="text-align: center">{{rowData['status']}}</div>
+                            </td>
+                            <td style="text-align: center">
+                                {{(rowData?.status === '1')? 'คอร์สปกติ': 'คอร์สนอกเวลา' }}
+                            </td>
+                            <td>
+                                <div class="ui-g" style="text-align: center">
+                                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                                        <button pButton type="button" label="ปิดคอร์ส" (click)="deleteCourse(rowData['id'])" class="ui-button-danger"></button>
+
+                                    </div>
+                                    <!-- <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                    <button pButton type="button" (click)="deleteCourse(rowData['id'])" label="ลบ"
+                    class="ui-button-warning"></button>
+                </div> -->
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

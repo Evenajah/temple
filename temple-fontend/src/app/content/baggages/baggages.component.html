@@ -1,0 +1,97 @@
+<ngx-spinner></ngx-spinner>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="row">
+            <div class="ui-g">
+                <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-12 aa">
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-fluid">
+                            <div style="text-align: center">
+                                <h2>ตู้สัมภาระ</h2>
+                            </div>
+                            <p-table [columns]="cols" [value]="items" [paginator]="true" [rows]="5" [responsive]="true">
+                                <ng-template pTemplate="caption" *ngIf="showEditButton('admin')">
+                                    <div style="text-align:left">
+                                        <button pButton type="button" (click)="showDialogToAdd()" label="เพิ่ม"
+                                            class="ui-button" style="width: 30%"></button>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                                            {{col.header}}
+                                            <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+                                                ariaLabelDesc="Activate to sort in descending order"
+                                                ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                                        </th>
+                                        <th *ngIf="showEditButton('admin')"></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr>
+                                        <td *ngFor="let col of columns;">
+                                            <span class="ui-column-title">{{col.header}}</span> {{rowData[col.field]}}
+                                        </td>
+                                        <td *ngIf="showEditButton('admin')" style="text-align:center">
+                                            <div>
+                                                <button pButton type="button" (click)="showEdit(rowData)" label="แก้ไข" class="ui-button-warning" style="width: 40%;"></button>
+                                                <button pButton type="button" (click)="delete(rowData)" label="ลบ" class="ui-button-danger" style="width: 40%;margin-left: 5mm;"></button>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-dialog (onHide)="clear()" header="รายละเอียดตู้สัมภาระ" [(visible)]="displayDialog" [responsive]="true"
+    showEffect="fade" [modal]="true" [contentStyle]="{ overflow: 'visible' }">
+    <div class="ui-g ui-fluid" *ngIf="baggage">
+        <div class="ui-g-12">
+            <div class="ui-g-4" style="text-align: right;">
+                <label for="name">หมายเลขตู้<span class="star">*</span></label>
+            </div>
+            <div class="ui-g-8">
+                <input pInputText id="name" [(ngModel)]="baggageNumber" />
+            </div>
+        </div>
+    </div>
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12">
+            <div class="ui-g-4" style="text-align: right;">
+                <label for="name">สถานที่<span class="star">*</span></label>
+            </div>
+            <div class="ui-g-8">
+                <p-autoComplete [(ngModel)]="location" [suggestions]="filteredLocation" value="id"
+                    (completeMethod)="filterLocationMultiple($event)" styleClass="wid100" [minLength]="1"
+                    placeholder="เลือกสถานที่" field="name" [dropdown]="true">
+                </p-autoComplete>
+
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button *ngIf="newBaggage" type="submit" pButton (click)="save()" label="บันทึก"
+                [disabled]="baggageNumber&&location?false:true"></button>
+            <button *ngIf="!newBaggage" type="button" class="ui-button-warning" pButton (click)="update()" label="แก้ไข"
+                [disabled]="baggageNumber&&location?false:true"></button>
+            <button type="button" class="ui-button-raised ui-button-secondary" pButton (click)="clear()" label="ยกเลิก"></button>
+
+        </div>
+    </p-footer>
+</p-dialog>
+<p-confirmDialog [style]="{width: '50vw'}" #cf>
+    <p-footer>
+      <button type="button" pButton label="ยืนยัน" style="background-color: #007ad9"
+        (click)="cf.accept()"></button>
+      <button type="button" pButton label="ยกเลิก"
+        class="ui-button-raised ui-button-secondary" (click)="cf.reject()"></button>
+    </p-footer>
+  </p-confirmDialog>

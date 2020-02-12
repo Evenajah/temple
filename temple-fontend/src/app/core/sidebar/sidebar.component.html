@@ -1,0 +1,37 @@
+<p-sidebar [visible]="openSideBar" (visibleChange)="clickOutsideBar()" position="left" [modal]="modalSidebar"
+  [showCloseIcon]="showCloseIconSidebar" styleClass="ui-sidebar-sm">
+  <div>
+    <a [routerLink]="['/']" (click)="clickMenu()" [routerLinkActiveOptions]="{exact: true}"
+      routerLinkActive="active-menuitem" class="list-menu"><span><i class="pi pi-home"></i> หน้าหลัก</span></a>
+
+    <a [routerLink]="['/profile/1']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu" *ngIf="showSideBar('user','monk')" ><span>
+        <fa-icon [icon]="['fas', 'user']"></fa-icon> ข้อมูลส่วนตัว
+      </span></a>
+
+    <a [routerLink]="['/courses']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu" *ngIf="showSideBar('user')" ><span>
+        <fa-icon [icon]="['fas', 'book-open']"></fa-icon> สมัครคอร์ส
+      </span></a>
+
+    <a [routerLink]="['/schedule']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu" *ngIf="showSideBar('user')"><span>
+        <fa-icon [icon]="['far', 'calendar-alt']"></fa-icon> ตารางเรียน
+      </span></a>
+
+    <a [routerLink]="['/baggages']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"  *ngIf="showSideBar('admin')"><span>
+        <fa-icon [icon]="['fas', 'archive']"></fa-icon> สัมภาระ
+      </span></a>
+    <a [routerLink]="['/users']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu" *ngIf="showSideBar('admin')"><span>
+        <fa-icon [icon]="['fas', 'users']"></fa-icon> จัดการสมาชิก
+      </span></a>
+    <a [routerLink]="['/location']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu" *ngIf="showSideBar('admin')"><span>
+        <fa-icon [icon]="['fas', 'landmark']"></fa-icon> จัดการสถานที่
+      </span></a>
+    <a [routerLink]="['/managedTitlename']" (click)="clickMenu()" routerLinkActive="active-menuitem"
+      class="list-menu"  *ngIf="showSideBar('admin')" ><span>
+        <fa-icon [icon]="['far', 'id-card']"></fa-icon> จัดการคำนำหน้า
+      </span></a>
+
+    <a (click)="logout($event)" routerLinkActive="active-menuitem" class="list-menu" ><span>
+        <fa-icon [icon]="['fas', 'lock']"></fa-icon> ออกจากระบบ
+      </span></a>
+  </div>
+</p-sidebar>

@@ -1,0 +1,134 @@
+<!-- จัดการคอร์ส (แอดมิน) -->
+<ngx-spinner></ngx-spinner>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="ui-g">
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+        <div style="text-align:center">
+            <h1>ตารางคอร์สทั้งหมด</h1>
+        </div>
+        <div class="line"></div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <p-table #dt [columns]="cols" [value]="courses" [paginator]="true" [rows]="5" [responsive]="true"
+                    selectionMode="single" [(selection)]="selectedCourse" (onRowSelect)="onRowSelect($event)"
+                    [totalRecords]="totalRecords">
+                    <ng-template pTemplate="caption">
+                        <div class="ui-g ui-fluid">
+                            <div class="ui-g-6 ui-lg-2 ui-md-4 ui-sm-4" style="text-align:left;">
+                                <button pButton type="button" (click)="createCourse()" label="สร้างคอร์ส"
+                                    class="ui-button-info ui-button-raised"></button>
+                            </div>
+                            <div class="ui-g-6 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
+                                <div class="ui-inputgroup">
+                                    <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                                    <input type="text" pInputText placeholder="ค้นหาชื่อคอร์ส"
+                                        (input)="dt.filterGlobal($event.target.value, 'contains')">
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th pSortableColumn="createDate">
+                                วันที่สร้าง
+                                <p-sortIcon field="createDate" ariaLabel="Activate to sort"
+                                    ariaLabelDesc="Activate to sort in descending order"
+                                    ariaLabelAsc="Activate to sort in ascending order">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="lastUpdate">
+                                วันที่แก้ไขล่าสุด
+                                <p-sortIcon field="lastUpdate" ariaLabel="Activate to sort"
+                                    ariaLabelDesc="Activate to sort in descending order"
+                                    ariaLabelAsc="Activate to sort in ascending order">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="name" class="ui-p-4">
+                                ชื่อคอร์ส
+                                <p-sortIcon field="name" ariaLabel="Activate to sort"
+                                    ariaLabelDesc="Activate to sort in descending order"
+                                    ariaLabelAsc="Activate to sort in ascending order">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="locationName" class="ui-p-5">
+                                สถานที่
+                                <p-sortIcon field="locationName" ariaLabel="Activate to sort"
+                                    ariaLabelDesc="Activate to sort in descending order"
+                                    ariaLabelAsc="Activate to sort in ascending order">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="transportTemple" class="ui-p-5">
+                                การเดินทางของวัด
+                                <p-sortIcon field="transportTemple" ariaLabel="Activate to sort"
+                                    ariaLabelDesc="Activate to sort in descending order"
+                                    ariaLabelAsc="Activate to sort in ascending order">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="conditionMin" class="ui-p-6">
+                                หมายเหตุ
+                                <p-sortIcon field="conditionMin" ariaLabel="Activate to sort"
+                                    ariaLabelDesc="Activate to sort in descending order"
+                                    ariaLabelAsc="Activate to sort in ascending order">
+                                </p-sortIcon>
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData">
+                            <td>
+                                {{rowData['createDate'] | formatTHdate}}
+                            </td>
+                            <td>
+                                {{rowData['lastUpdate'] | formatTHdate}}
+                            </td>
+                            <td>
+                                {{rowData['name']}}
+                            </td>
+                            <td>
+                                {{rowData['locationName']}}
+                            </td>
+                            <td>
+                                <div *ngIf="rowData['transportation'] != null ; else nullValue">
+                                    {{rowData['transportation']['name']}} <br>
+                                    เวลารับ : {{rowData['transportation']['timePickUp'] | date: "HH:mm"}} <br> เวลาส่ง :
+                                    {{rowData['transportation']['timeSend'] | date: "HH:mm"}}
+                                </div>
+                                <ng-template #nullValue>
+                                    ไม่มีข้อมูล
+                                </ng-template>
+                            </td>
+                            <td>
+                                ต้องผ่านอย่างน้อย {{rowData['conditionMin']}} คอร์ส
+                            </td>
+                            <td>
+                                <div class="ui-g" style="text-align: center">
+                                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                                        <button pButton type="button" label="แก้ไข" (click)="editCourse(rowData['id'])"
+                                            class="ui-button-warning ui-button-raised"></button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
+<p-confirmDialog [style]="{width: '50vw'}" #cd>
+    <p-footer>
+        <button type="button" pButton label="ยืนยัน" (click)="cd.accept()"
+            class="ui-button-raised ui-button-info"></button>
+        <button type="button" pButton label="ยกเลิก" (click)="cd.reject()"
+            class="ui-button-raised ui-button-secondary"></button>
+    </p-footer>
+</p-confirmDialog>
+
+<app-course-create [displayCreateDialog]="displayCreateDialog" (closeDisplayCreateDialog)="closeCreateDialog($event)" #CourseCreate>
+</app-course-create>
+
+<app-course-edit [displayEditDialog]="displayEditDialog" (closeDisplayEditDialog)="closeEditDialog($event)" #CourseEdit>
+</app-course-edit>

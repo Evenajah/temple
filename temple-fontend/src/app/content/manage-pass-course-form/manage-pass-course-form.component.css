@@ -1,0 +1,18 @@
+:host>>>.ui-dropdown {
+    display: block !important;
+    margin-left: auto !important;
+}
+
+.table-grid {
+    width: 10%;
+}
+
+.content-center {
+    text-align: center;
+}
+
+@media only screen and (max-width: 610px) {
+    .table-grid {
+        width: 20%;
+    }
+}

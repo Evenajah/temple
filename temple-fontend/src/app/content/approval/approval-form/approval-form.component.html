@@ -1,0 +1,37 @@
+<ngx-spinner></ngx-spinner>
+<div class="container">
+    <div class="ui-g">
+        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+            <div style="text-align: center">
+                <h1>{{nameCourse}}</h1>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+            <div class="line" *ngIf="courseType === 'InTime'" ></div>
+        </div>
+        <ng-container *ngIf="courseType === 'InTime'">
+            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <app-list-allow [cols]="cols" [member]="member" [option]='option' (listData)="showDialog($event)"
+                    [fieldId]='fieldId'></app-list-allow>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="courseType === 'OutTime'">
+            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <app-approve-out-time [cols]="cols" [detail]="courseOutTime" [option]='option'
+                    (listData)="showDialogOutTime($event)" [fieldId]='fieldId'>
+                    <!-- [cols]="cols" [member]="member" [option]='option' (listData)="showDialog($event)" [fieldId]='fieldId' -->
+                </app-approve-out-time>
+            </div>
+        </ng-container>
+
+
+    </div>
+</div>
+<p-confirmDialog [style]="{width: '50vw'}" #cd>
+    <p-footer>
+        <button type="button" pButton label="ยืนยัน" (click)="cd.accept()"
+            class="ui-button-raised ui-button-info"></button>
+        <button type="button" pButton label="ยกเลิก" (click)="cd.reject()"
+            class="ui-button-raised ui-button-secondary"></button>
+    </p-footer>
+</p-confirmDialog>
