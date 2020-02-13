@@ -1,118 +1,120 @@
 <!-- จัดการคอร์ส-แก้ไขคอร์ส (แอดมิน) -->
-<p-dialog (onHide)="onCancle($event)"  header="แก้ไขคอร์ส" [(visible)]="displayEditDialog" [responsive]="true" 
-  showEffect="fade" [modal]="true" [style]="{width: '700px'}" [contentStyle]="{ overflow: 'visible' }">
+<p-dialog (onHide)="onCancle($event)" header="แก้ไขคอร์ส" [(visible)]="displayEditDialog" [responsive]="true"
+    showEffect="fade" [modal]="true" [style]="{width: '700px'}" [contentStyle]="{ overflow: 'visible' }">
     <form [formGroup]="formEdit">
         <div class="ui-g">
             <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-                    <div class="ui-g">
-                        <!-- ชื่อคอร์ส -->
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" *ngIf="!formError.courseName" >
-                            <label>ชื่อคอร์ส<span class="star">*</span></label>
+                <div class="ui-g">
+                    <!-- ชื่อคอร์ส -->
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" *ngIf="!formError.courseName">
+                        <label>ชื่อคอร์ส<span class="star">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-danger text-invalid" *ngIf="formError.courseName">
+                        <label>{{formError.courseName}}</label>
+                    </div>
+
+                    <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9 ">
+                        <input type="text" pInputText placeholder="ชื่อคอร์ส" formControlName="courseName">
+                        <div class="text-danger text-invalid">
+                            <label>{{formLengthError.courseName}}</label>
                         </div>
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-danger text-invalid" *ngIf="formError.courseName" >
-                            <label>{{formError.courseName}}</label>
-                        </div>
-                        
-                        <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9 ">
-                            <input type="text" pInputText placeholder="ชื่อคอร์ส" formControlName="courseName">
-                            <div class="text-danger text-invalid">
-                                <label>{{formLengthError.courseName}}</label>
-                            </div>
-                        </div>
-                        <!-- รายละเอียด -->
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" *ngIf="!formError.detail">
-                            <label>รายละเอียด<span class="star">*</span></label>
-                        </div>
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-danger text-invalid" *ngIf="formError.detail">
-                            <label>{{formError.detail}}</label>
-                        </div>
-                        
-                        <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9 ">
-                            <textarea [rows]="2" [cols]="30" class="fixtextarea" pInputText placeholder="รายละเอียด"
-                                formControlName="detail">
+                    </div>
+                    <!-- รายละเอียด -->
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" *ngIf="!formError.detail">
+                        <label>รายละเอียด<span class="star">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-danger text-invalid" *ngIf="formError.detail">
+                        <label>{{formError.detail}}</label>
+                    </div>
+
+                    <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9 ">
+                        <textarea [rows]="2" [cols]="30" class="fixtextarea" pInputText placeholder="รายละเอียด"
+                            formControlName="detail">
                             </textarea>
-                            <div class="text-danger text-invalid">
-                                <label>{{formLengthError.detail}}</label>
-                            </div>
+                        <div class="text-danger text-invalid">
+                            <label>{{formLengthError.detail}}</label>
                         </div>
-                        <!-- สถานที่ -->
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" *ngIf="!formError.location">
-                            <label>สถานที่<span class="star">*</span></label>
-                        </div>
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-danger text-invalid" *ngIf="formError.location">
-                            <label>{{formError.location}}</label>
-                        </div>
-                        
-                        <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9 ">
-                            <p-dropdown [options]="locations" formControlName="location" value="id"
-                            optionLabel="name">
-                            </p-dropdown>
-                        </div>
-                         <!-- การเดินทางของวัด -->
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" >
-                            <label>การเดินทาง</label>
-                        </div>
+                    </div>
+                    <!-- สถานที่ -->
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" *ngIf="!formError.location">
+                        <label>สถานที่<span class="star">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-danger text-invalid" *ngIf="formError.location">
+                        <label>{{formError.location}}</label>
+                    </div>
 
-                        <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9">
-                            <p-dropdown [options]="transport" placeholder="กรุณาเลือกการเดินทางของวัด" formControlName="transportTemple" value="id"
-                            optionLabel="name" [showClear]="true" >
-                            </p-dropdown>
-                        </div>
-                        <!-- วันที่เรียน -->
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" *ngIf="!formError.date" >
-                            <label>วันที่เรียน<span class="star">*</span></label>
-                        </div>
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-danger text-invalid" *ngIf="formError.date" >
-                            <label>{{formError.date}}</label>
-                        </div>
+                    <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9 ">
+                        <p-dropdown [options]="locations" formControlName="location" value="id" optionLabel="name">
+                        </p-dropdown>
+                    </div>
+                    <!-- การเดินทางของวัด -->
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info">
+                        <label>การเดินทาง</label>
+                    </div>
 
-                        <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9 ">
-                            <p-calendar cdgsThaiCalendar class="calendar-button" dateFormat="dd/mm/yy" [monthNavigator]="true" formControlName="date"
-                            selectionMode="range" [readonlyInput]="true" [yearNavigator]="true" [yearRange]="yearRange">
-                            </p-calendar>
-                        </div>
-                        <!-- ผู้สอน -->
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" *ngIf="!formError.teachers">
-                            <label>ผู้สอน<span class="star">*</span></label>
-                        </div>
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-danger text-invalid" *ngIf="formError.teachers">
-                            <label>{{formError.teachers}}</label>
-                        </div>
-                        
-                        <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9 ">
-                            <p-autoComplete formControlName="teachers" [suggestions]="filteredTeacher" value="id"
-                                (completeMethod)="filterTeacherMultiple($event)" styleClass="wid100" [minLength]="1"
-                                placeholder="ผู้สอน" field="name" [multiple]="true" [dropdown]="true">
-                            </p-autoComplete>
-                        </div>
-                        <!-- เงื่อนไขการผ่านคอร์ส -->
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" *ngIf="!formError.conditionMin">
-                            <label>เงื่อนไข<span class="star">*</span></label>
-                        </div>
-                        <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-danger text-invalid" *ngIf="formError.conditionMin">
-                            <label>{{formError.conditionMin}}</label>
-                        </div>
-                        
-                        <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9 ">
-                            ผ่านคอร์สอย่างน้อย <p-dropdown [options]="notice" placeholder="เลือกจำนวน"
+                    <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9">
+                        <p-dropdown [options]="transport" placeholder="กรุณาเลือกการเดินทางของวัด"
+                            formControlName="transportTemple" value="id" optionLabel="name" [showClear]="true">
+                        </p-dropdown>
+                    </div>
+                    <!-- วันที่เรียน -->
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" *ngIf="!formError.date">
+                        <label>วันที่เรียน<span class="star">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-danger text-invalid" *ngIf="formError.date">
+                        <label>{{formError.date}}</label>
+                    </div>
+
+                    <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9 ">
+                        <p-calendar cdgsThaiCalendar class="calendar-button" dateFormat="dd/mm/yy"
+                            [monthNavigator]="true" formControlName="date" selectionMode="range" [readonlyInput]="true"
+                            [yearNavigator]="true" [yearRange]="yearRange">
+                        </p-calendar>
+                    </div>
+                    <!-- ผู้สอน -->
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" *ngIf="!formError.teachers">
+                        <label>ผู้สอน<span class="star">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-danger text-invalid" *ngIf="formError.teachers">
+                        <label>{{formError.teachers}}</label>
+                    </div>
+
+                    <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9 ">
+                        <p-autoComplete formControlName="teachers" [suggestions]="filteredTeacher" value="id"
+                            (completeMethod)="filterTeacherMultiple($event)" styleClass="wid100" [minLength]="1"
+                            placeholder="ผู้สอน" field="name" [multiple]="true" [dropdown]="true">
+                        </p-autoComplete>
+                    </div>
+                    <!-- เงื่อนไขการผ่านคอร์ส -->
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-info" *ngIf="!formError.conditionMin">
+                        <label>เงื่อนไข<span class="star">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-lg-3 ui-md-2 ui-sm-3 text-danger text-invalid"
+                        *ngIf="formError.conditionMin">
+                        <label>{{formError.conditionMin}}</label>
+                    </div>
+
+                    <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-9 ">
+                        ผ่านคอร์สอย่างน้อย <p-dropdown [options]="notice" placeholder="เลือกจำนวน"
                             formControlName="conditionMin" value="id" optionLabel="id"></p-dropdown> คอร์ส
-                        </div>
                     </div>
                 </div>
             </div>
-                <!-- <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 row">
+        </div>
+        <!-- <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 row">
                     <div class="center temple-button font-show">
                         <p-button type="submit" label="ยืนยัน"  class="ui-button-raised ui-button-info"></p-button>
                         <p-button type="button" label="ยกเลิก" (onClick)="onCancel()" class="ui-button-raised ui-button-danger"></p-button>
                     </div>
                 </div> -->
-           
+
     </form>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button type="submit" pButton  label="แก้ไข" class="ui-button-warning ui-button-raised" (click)="onSubmit()"></button>
-            <button type="button" pButton label="ยกเลิก" class="ui-button-secondary ui-button-raised" (click)="onCancle($event)"></button>
+            <button type="submit" pButton label="แก้ไข" class="ui-button-warning ui-button-raised"
+                (click)="onSubmit()"></button>
+            <button type="button" pButton label="ยกเลิก" class="ui-button-secondary ui-button-raised"
+                (click)="onCancle($event)"></button>
         </div>
     </p-footer>
-  </p-dialog>
-  
+</p-dialog>

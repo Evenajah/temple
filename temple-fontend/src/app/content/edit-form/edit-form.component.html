@@ -206,7 +206,8 @@
                 </div>
                 <div class="ui-g-12 ui-lg-6 ui-md-4">
                   <p-calendar cdgsThaiCalendar formControlName="ordianDate" [monthNavigator]="true"
-                    [yearNavigator]="true" yearRange="{{year-60}}:{{year}}" [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
+                    [yearNavigator]="true" yearRange="{{year-60}}:{{year}}" [showIcon]="true" dateFormat="dd/mm/yy">
+                  </p-calendar>
                 </div>
               </div>
               <!-- จำนวนพรรษาบวช -->
@@ -217,7 +218,8 @@
                   </div>
                 </div>
                 <div class="ui-g-12 ui-lg-2 ui-md-1">
-                  <input type="number" pInputText formControlName="ordianNumber" style="width: 55px;" maxlength="3" min="0" />
+                  <input type="number" pInputText formControlName="ordianNumber" style="width: 55px;" maxlength="3"
+                    min="0" />
                 </div>
               </div>
             </div>
