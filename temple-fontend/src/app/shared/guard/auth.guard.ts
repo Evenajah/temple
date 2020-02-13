@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
   auth() {
     return new Promise((resolve, reject) => {
       if (localStorage.getItem('access-token')) {
-        this.http.get(ApiConstants.baseURl + '/auth/loginWithToken',
+        this.http.get(`${ApiConstants.baseURl}/auth/loginWithToken`,
           {
             headers:
               { Authorization: `Bearer ${localStorage.getItem('access-token')}` }
